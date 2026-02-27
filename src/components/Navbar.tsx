@@ -24,8 +24,8 @@ export default function Navbar() {
                     <Image
                         src="/images/logo.png"
                         alt="Dyuthi Dance Studio"
-                        width={72}
-                        height={72}
+                        width={144}
+                        height={144}
                         className="object-contain"
                     />
                     <span className="text-xl font-bold text-slate-900 hidden sm:block">
