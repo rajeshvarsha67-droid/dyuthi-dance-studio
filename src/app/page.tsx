@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import OurStorySection from "@/components/OurStorySection";
 import DanceStylesSection from "@/components/DanceStylesSection";
 import InstructorsSection from "@/components/InstructorsSection";
 import ReviewsSection from "@/components/ReviewsSection";
@@ -15,7 +14,6 @@ export default function Home() {
             <Navbar />
             <main>
                 <HeroSection />
-                <OurStorySection />
                 <DanceStylesSection />
                 <InstructorsSection />
                 <ReviewsSection />

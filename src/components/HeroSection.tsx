@@ -18,7 +18,7 @@ export default function HeroSection() {
             {/* Content */}
             <div className="relative z-10 text-center px-6 max-w-3xl">
                 <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-                    Dyuthi Dance Studio
+                    Welcome to Dyuthi Dance Studio
                 </h1>
                 <p className="text-lg md:text-xl text-white/80 mb-10 leading-relaxed">
                     Traverse into the boundless world of dance.
