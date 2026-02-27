@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { UserPlus, Loader2, CheckCircle2, XCircle, Sparkles } from "lucide-react";
+import { UserPlus, Loader2, CheckCircle2, XCircle } from "lucide-react";
 
 interface IRegistrationForm {
     name: string;
@@ -381,10 +381,6 @@ export default function RegistrationForm() {
                     <div className="mt-8 rounded-2xl border border-green-200 bg-gradient-to-br from-green-50 to-emerald-50 p-6 shadow-md">
                         <div className="prose prose-sm max-w-none text-slate-700 leading-relaxed whitespace-pre-line">
                             {welcomeMessage}
-                        </div>
-                        <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-400">
-                            <Sparkles size={12} />
-                            <span>Powered by AI ✨</span>
                         </div>
                     </div>
                 )}

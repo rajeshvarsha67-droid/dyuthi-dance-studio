@@ -19,6 +19,12 @@ const LOCATION_BATCHES: Record<string, string[]> = {
     bpcl_township: ["Senior batch", "Junior batch"],
 };
 
+const LOCATION_LABELS: Record<string, string> = {
+    kaloor: "Kaloor Branch",
+    kalamassery: "Kalamassery Branch",
+    bpcl_township: "BPCL Township",
+};
+
 function validateBody(body: RegistrationBody): string | null {
     if (!body.name || body.name.trim().length < 2) {
         return "Name must be at least 2 characters.";
@@ -128,8 +134,9 @@ export async function POST(request: NextRequest) {
                 .update({ ai_welcome_message: welcomeMessage })
                 .eq("id", data.id);
         } catch (aiError) {
-            console.error("AI welcome message error:", aiError);
-            welcomeMessage = `Welcome to Dyuthi Dance Studio, ${data.name}! 🎉 We're thrilled to have you join us. Our team will reach out to you shortly on WhatsApp.`;
+            console.error("Welcome message error:", aiError);
+            const fallbackLocation = LOCATION_LABELS[data.dance_style] || data.dance_style;
+            welcomeMessage = `A very warm welcome to the Dyuthi Dance Studio family! We are absolutely thrilled to have you join our ${fallbackLocation} and embark on your dance journey with us.`;
         }
 
         return NextResponse.json(

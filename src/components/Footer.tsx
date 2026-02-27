@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MapPin, Phone } from "lucide-react";
+import { MapPin, Phone, ExternalLink } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -27,14 +27,25 @@ export default function Footer() {
                     {/* Locations Column */}
                     <div>
                         <h3 className="text-base font-semibold mb-4">Our Locations</h3>
-                        <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-5">
                             <div className="flex items-start gap-2">
                                 <MapPin size={16} className="text-[#D32F2F] mt-0.5 shrink-0" />
                                 <div>
                                     <p className="text-sm font-medium text-slate-300">
                                         Kaloor Branch
                                     </p>
-                                    <p className="text-xs text-slate-500">Kaloor, Kochi, Kerala</p>
+                                    <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                                        Mother Teresa Road, Shenoy Rd, Kaloor, Kochi, Kerala 682017
+                                    </p>
+                                    <a
+                                        href="https://maps.app.goo.gl/HujfH7Exki6525qj7"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1 text-xs text-[#D32F2F] hover:text-red-400 transition-colors mt-1"
+                                    >
+                                        View on Google Maps
+                                        <ExternalLink size={10} />
+                                    </a>
                                 </div>
                             </div>
                             <div className="flex items-start gap-2">
@@ -43,9 +54,18 @@ export default function Footer() {
                                     <p className="text-sm font-medium text-slate-300">
                                         Kalamassery Branch
                                     </p>
-                                    <p className="text-xs text-slate-500">
-                                        Kalamassery, Kochi, Kerala
+                                    <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                                        3rd Floor, Maria Plaza, Rajagiri Rd, North Kalamassery, Kalamassery, Kochi, Kerala 683104
                                     </p>
+                                    <a
+                                        href="https://maps.app.goo.gl/7SNjXquse1rTLesu8"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1 text-xs text-[#D32F2F] hover:text-red-400 transition-colors mt-1"
+                                    >
+                                        View on Google Maps
+                                        <ExternalLink size={10} />
+                                    </a>
                                 </div>
                             </div>
                         </div>
