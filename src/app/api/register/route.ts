@@ -1,18 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 import { supabase } from "@/lib/supabase";
 import { generateWelcomeMessage } from "@/lib/gemini";
 
 interface RegistrationBody {
     name: string;
     age: string;
-    phone: string;
+    whatsapp: string;
     email: string;
-    danceStyle: string;
+    location: string;
     preferredBatch: string;
 }
 
-const VALID_DANCE_STYLES = ["western", "zumba", "bollywood", "bharatanatyam"];
-const VALID_BATCHES = ["morning", "evening", "weekend"];
+const VALID_LOCATIONS = ["kaloor", "kalamassery", "bpcl_township"];
+
+const LOCATION_BATCHES: Record<string, string[]> = {
+    kaloor: ["Zumba batch", "Western dance batch", "Bharathanatyam batch"],
+    kalamassery: ["Zumba batch", "Bollywood dance for women", "Western dance batch"],
+    bpcl_township: ["Senior batch", "Junior batch"],
+};
 
 function validateBody(body: RegistrationBody): string | null {
     if (!body.name || body.name.trim().length < 2) {
@@ -25,8 +31,8 @@ function validateBody(body: RegistrationBody): string | null {
     }
 
     const phoneRegex = /^[6-9]\d{9}$/;
-    if (!phoneRegex.test(body.phone)) {
-        return "Enter a valid 10-digit Indian phone number.";
+    if (!phoneRegex.test(body.whatsapp)) {
+        return "Enter a valid 10-digit Indian WhatsApp number.";
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,12 +40,13 @@ function validateBody(body: RegistrationBody): string | null {
         return "Enter a valid email address.";
     }
 
-    if (!VALID_DANCE_STYLES.includes(body.danceStyle)) {
-        return "Please select a valid dance style.";
+    if (!VALID_LOCATIONS.includes(body.location)) {
+        return "Please select a valid location.";
     }
 
-    if (!VALID_BATCHES.includes(body.preferredBatch)) {
-        return "Please select a valid batch.";
+    const validBatches = LOCATION_BATCHES[body.location] || [];
+    if (!validBatches.includes(body.preferredBatch)) {
+        return "Please select a valid batch for the chosen location.";
     }
 
     return null;
@@ -47,7 +54,9 @@ function validateBody(body: RegistrationBody): string | null {
 
 export async function POST(request: NextRequest) {
     try {
-        if (!supabase) {
+        // Use admin client (service role key, bypasses RLS) if available, else fall back to anon client
+        const db = supabaseAdmin || supabase;
+        if (!db) {
             return NextResponse.json(
                 { error: "Database service is not configured. Please contact support." },
                 { status: 503 }
@@ -64,39 +73,39 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const phone = body.phone.trim();
+        const whatsapp = body.whatsapp.trim();
 
-        // Check for duplicate phone number
-        const { data: existing } = await supabase
+        // Check for duplicate WhatsApp number
+        const { data: existing } = await db
             .from("registrations")
             .select("id")
-            .eq("phone", phone)
+            .eq("phone", whatsapp)
             .limit(1)
-            .single();
+            .maybeSingle();
 
         if (existing) {
             return NextResponse.json(
-                { error: "This phone number is already registered." },
+                { error: "This WhatsApp number is already registered." },
                 { status: 409 }
             );
         }
 
         // Insert into Supabase
-        const { data, error } = await supabase
+        const { data, error } = await db
             .from("registrations")
             .insert({
                 name: body.name.trim(),
                 age: parseInt(body.age, 10),
-                phone: phone,
+                phone: whatsapp,
                 email: body.email.trim().toLowerCase(),
-                dance_style: body.danceStyle,
+                dance_style: body.location,
                 preferred_batch: body.preferredBatch,
             })
             .select()
             .single();
 
         if (error) {
-            console.error("Supabase insert error:", error);
+            console.error("Supabase insert error:", JSON.stringify(error, null, 2));
             return NextResponse.json(
                 {
                     error: "Failed to save registration. Please try again.",
@@ -111,12 +120,12 @@ export async function POST(request: NextRequest) {
             welcomeMessage = await generateWelcomeMessage({
                 name: data.name,
                 age: data.age,
-                danceStyle: data.dance_style,
+                location: data.dance_style,
                 preferredBatch: data.preferred_batch,
             });
 
             // Store the AI message back in Supabase
-            await supabase
+            await db
                 .from("registrations")
                 .update({ ai_welcome_message: welcomeMessage })
                 .eq("id", data.id);

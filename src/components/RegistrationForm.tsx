@@ -6,27 +6,39 @@ import { UserPlus, Loader2, CheckCircle2, XCircle, Sparkles } from "lucide-react
 interface IRegistrationForm {
     name: string;
     age: string;
-    phone: string;
+    whatsapp: string;
     email: string;
-    danceStyle: string;
+    location: string;
     preferredBatch: string;
 }
 
 interface FormErrors {
     name?: string;
     age?: string;
-    phone?: string;
+    whatsapp?: string;
     email?: string;
-    danceStyle?: string;
+    location?: string;
     preferredBatch?: string;
 }
+
+const LOCATION_BATCHES: Record<string, string[]> = {
+    kaloor: ["Zumba batch", "Western dance batch", "Bharathanatyam batch"],
+    kalamassery: ["Zumba batch", "Bollywood dance for women", "Western dance batch"],
+    bpcl_township: ["Senior batch", "Junior batch"],
+};
+
+const LOCATION_LABELS: Record<string, string> = {
+    kaloor: "Kaloor Branch",
+    kalamassery: "Kalamassery Branch",
+    bpcl_township: "BPCL Township",
+};
 
 const initialFormData: IRegistrationForm = {
     name: "",
     age: "",
-    phone: "",
+    whatsapp: "",
     email: "",
-    danceStyle: "",
+    location: "",
     preferredBatch: "",
 };
 
@@ -53,8 +65,8 @@ export default function RegistrationForm() {
         }
 
         const phoneRegex = /^[6-9]\d{9}$/;
-        if (!phoneRegex.test(formData.phone)) {
-            newErrors.phone = "Enter a valid 10-digit Indian phone number.";
+        if (!phoneRegex.test(formData.whatsapp)) {
+            newErrors.whatsapp = "Enter a valid 10-digit Indian WhatsApp number.";
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -62,8 +74,8 @@ export default function RegistrationForm() {
             newErrors.email = "Enter a valid email address.";
         }
 
-        if (!formData.danceStyle) {
-            newErrors.danceStyle = "Please select a dance style.";
+        if (!formData.location) {
+            newErrors.location = "Please select a location.";
         }
 
         if (!formData.preferredBatch) {
@@ -121,11 +133,26 @@ export default function RegistrationForm() {
     };
 
     const updateField = (field: keyof IRegistrationForm, value: string) => {
-        setFormData((prev) => ({ ...prev, [field]: value }));
+        setFormData((prev) => {
+            const updated = { ...prev, [field]: value };
+            // Reset batch when location changes
+            if (field === "location") {
+                updated.preferredBatch = "";
+            }
+            return updated;
+        });
         if (errors[field]) {
             setErrors((prev) => ({ ...prev, [field]: undefined }));
         }
+        // Also clear batch error when location changes (since batch resets)
+        if (field === "location" && errors.preferredBatch) {
+            setErrors((prev) => ({ ...prev, preferredBatch: undefined }));
+        }
     };
+
+    const availableBatches = formData.location
+        ? LOCATION_BATCHES[formData.location] || []
+        : [];
 
     return (
         <section id="register" className="bg-white py-20 lg:py-28">
@@ -216,27 +243,27 @@ export default function RegistrationForm() {
                         )}
                     </div>
 
-                    {/* Phone */}
+                    {/* WhatsApp Number */}
                     <div>
                         <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                            Phone Number
+                            WhatsApp Number
                         </label>
                         <input
                             type="tel"
                             required
-                            placeholder="10-digit number (e.g. 9876543210)"
-                            value={formData.phone}
+                            placeholder="10-digit WhatsApp number (e.g. 9876543210)"
+                            value={formData.whatsapp}
                             onChange={(e) =>
-                                updateField("phone", e.target.value)
+                                updateField("whatsapp", e.target.value)
                             }
-                            className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 ${errors.phone
+                            className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 ${errors.whatsapp
                                 ? "border-red-400"
                                 : "border-gray-200"
                                 }`}
                         />
-                        {errors.phone && (
+                        {errors.whatsapp && (
                             <p className="mt-1 text-xs text-red-500">
-                                {errors.phone}
+                                {errors.whatsapp}
                             </p>
                         )}
                     </div>
@@ -266,31 +293,30 @@ export default function RegistrationForm() {
                         )}
                     </div>
 
-                    {/* Dance Style */}
+                    {/* Location */}
                     <div>
                         <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                            Dance Style
+                            Location
                         </label>
                         <select
                             required
-                            value={formData.danceStyle}
+                            value={formData.location}
                             onChange={(e) =>
-                                updateField("danceStyle", e.target.value)
+                                updateField("location", e.target.value)
                             }
-                            className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 appearance-none ${errors.danceStyle
+                            className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 appearance-none ${errors.location
                                 ? "border-red-400"
                                 : "border-gray-200"
                                 }`}
                         >
-                            <option value="">Select a dance style</option>
-                            <option value="western">Western Dance</option>
-                            <option value="zumba">Zumba Fitness</option>
-                            <option value="bollywood">Bollywood</option>
-                            <option value="bharatanatyam">Bharatanatyam</option>
+                            <option value="">Select a location</option>
+                            <option value="kaloor">Kaloor Branch</option>
+                            <option value="kalamassery">Kalamassery Branch</option>
+                            <option value="bpcl_township">BPCL Township</option>
                         </select>
-                        {errors.danceStyle && (
+                        {errors.location && (
                             <p className="mt-1 text-xs text-red-500">
-                                {errors.danceStyle}
+                                {errors.location}
                             </p>
                         )}
                     </div>
@@ -306,15 +332,22 @@ export default function RegistrationForm() {
                             onChange={(e) =>
                                 updateField("preferredBatch", e.target.value)
                             }
+                            disabled={!formData.location}
                             className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 appearance-none ${errors.preferredBatch
                                 ? "border-red-400"
                                 : "border-gray-200"
-                                }`}
+                                } ${!formData.location ? "opacity-50 cursor-not-allowed" : ""}`}
                         >
-                            <option value="">Select a batch</option>
-                            <option value="morning">Morning</option>
-                            <option value="evening">Evening</option>
-                            <option value="weekend">Weekend</option>
+                            <option value="">
+                                {formData.location
+                                    ? "Select a batch"
+                                    : "Select a location first"}
+                            </option>
+                            {availableBatches.map((batch) => (
+                                <option key={batch} value={batch}>
+                                    {batch}
+                                </option>
+                            ))}
                         </select>
                         {errors.preferredBatch && (
                             <p className="mt-1 text-xs text-red-500">
