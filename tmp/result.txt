@@ -1,0 +1,6 @@
+﻿FAIL "Bharatanatyam": 23514 - new row for relation "registrations" violates check constraint "registrations_dance_style_check"
+FAIL "bharatanatyam": 23514 - new row for relation "registrations" violates check constraint "registrations_preferred_batch_check"
+FAIL "Kathak": 23514 - new row for relation "registrations" violates check constraint "registrations_dance_style_check"
+FAIL "Hip Hop": 23514 - new row for relation "registrations" violates check constraint "registrations_dance_style_check"
+FAIL "Zumba": 23514 - new row for relation "registrations" violates check constraint "registrations_dance_style_check"
+FAIL "Contemporary": 23514 - new row for relation "registrations" violates check constraint "registrations_dance_style_check"

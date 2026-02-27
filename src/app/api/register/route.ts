@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 import { generateWelcomeMessage } from "@/lib/gemini";
 
 interface RegistrationBody {
@@ -55,7 +54,7 @@ function validateBody(body: RegistrationBody): string | null {
 export async function POST(request: NextRequest) {
     try {
 
-        if (!supabase) {
+        if (!supabaseAdmin) {
             return NextResponse.json(
                 { error: "Database service is not configured. Please contact support." },
                 { status: 503 }
@@ -75,7 +74,7 @@ export async function POST(request: NextRequest) {
         const whatsapp = body.whatsapp.trim();
 
         // Check for duplicate WhatsApp number
-        const { data: existing } = await supabase
+        const { data: existing } = await supabaseAdmin
             .from("registrations")
             .select("id")
             .eq("phone", whatsapp)
@@ -90,7 +89,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Insert into Supabase
-        const { data, error } = await supabase
+        const { data, error } = await supabaseAdmin
             .from("registrations")
             .insert({
                 name: body.name.trim(),
@@ -124,7 +123,7 @@ export async function POST(request: NextRequest) {
             });
 
             // Store the AI message back in Supabase
-            await supabase
+            await supabaseAdmin
                 .from("registrations")
                 .update({ ai_welcome_message: welcomeMessage })
                 .eq("id", data.id);
