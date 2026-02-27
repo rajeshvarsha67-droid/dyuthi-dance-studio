@@ -2,9 +2,6 @@ export default function OurStorySection() {
     return (
         <section id="welcome" className="bg-gray-50 py-20 lg:py-28">
             <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
-                <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-8 leading-tight">
-                    Welcome to Dyuthi Dance Studio
-                </h2>
                 <p className="text-base lg:text-lg text-slate-600 leading-relaxed mb-6">
                     <strong className="text-slate-800">Dyuthi Dance Studio</strong> is a joyful space
                     where dance meets confidence, creativity, and community. We offer engaging dance
