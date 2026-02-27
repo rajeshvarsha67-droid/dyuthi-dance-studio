@@ -18,10 +18,16 @@ export default function Footer() {
                             />
                             <span className="text-xl font-bold">Dyuthi Dance Studio</span>
                         </div>
-                        <p className="text-sm text-slate-400 leading-relaxed">
+                        <p className="text-sm text-slate-400 leading-relaxed mb-4">
                             At Dyuthi, dance is joy, confidence, and connection. A welcoming
                             space for children and adults to discover the art of movement.
                         </p>
+                        <a
+                            href="/our-story"
+                            className="text-sm font-medium text-[#D32F2F] hover:text-red-400 transition-colors"
+                        >
+                            Our Story →
+                        </a>
                     </div>
 
                     {/* Locations Column */}
