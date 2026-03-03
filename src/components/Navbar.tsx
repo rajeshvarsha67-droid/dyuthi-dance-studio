@@ -2,15 +2,16 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-    { label: "Home", href: "#home" },
+    { label: "Home", href: "/#home" },
     { label: "Our Story", href: "/our-story" },
-    { label: "Styles", href: "#styles" },
-    { label: "Instructors", href: "#instructors" },
-    { label: "Schedule", href: "#schedule" },
-    { label: "Contact", href: "#contact" },
+    { label: "Styles", href: "/#styles" },
+    { label: "Instructors", href: "/#instructors" },
+    { label: "Schedule", href: "/#schedule" },
+    { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -20,9 +21,9 @@ export default function Navbar() {
         <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
                 {/* Logo */}
-                <a href="#home" className="flex items-center gap-3">
+                <Link href="/#home" className="flex items-center gap-3">
                     <Image
-                        src="/images/logo.png"
+                        src="/images/logo-no-bg.png"
                         alt="Dyuthi Dance Studio"
                         width={144}
                         height={144}
@@ -31,18 +32,18 @@ export default function Navbar() {
                     <span className="text-xl font-bold text-slate-900 hidden sm:block">
                         Dyuthi
                     </span>
-                </a>
+                </Link>
 
                 {/* Desktop Links */}
                 <ul className="hidden lg:flex items-center gap-8">
                     {navLinks.map((link) => (
                         <li key={link.href}>
-                            <a
+                            <Link
                                 href={link.href}
                                 className="text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
                             >
                                 {link.label}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>
@@ -73,13 +74,13 @@ export default function Navbar() {
                     <ul className="flex flex-col gap-4 pt-4">
                         {navLinks.map((link) => (
                             <li key={link.href}>
-                                <a
+                                <Link
                                     href={link.href}
                                     className="text-sm font-medium text-slate-700 hover:text-slate-900"
                                     onClick={() => setMobileOpen(false)}
                                 >
                                     {link.label}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>
@@ -96,3 +97,4 @@ export default function Navbar() {
         </nav>
     );
 }
+

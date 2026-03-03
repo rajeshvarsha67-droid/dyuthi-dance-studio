@@ -5,10 +5,10 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const reviews = [
-    { image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80", alt: "Happy student 1" },
-    { image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80", alt: "Happy student 2" },
-    { image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80", alt: "Happy student 3" },
-    { image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80", alt: "Happy student 4" },
+    { image: "/images/review-1.jpg", alt: "Happy student 1" },
+    { image: "/images/review-2.jpg", alt: "Happy student 2" },
+    { image: "/images/review-3.jpg", alt: "Happy student 3" },
+    { image: "/images/review-4.jpg", alt: "Happy student 4" },
 ];
 
 export default function ReviewsSection() {

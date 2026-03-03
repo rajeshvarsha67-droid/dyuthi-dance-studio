@@ -5,10 +5,10 @@ export default function HeroSection() {
         <section id="home" className="relative w-full h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden">
             {/* Background Image */}
             <Image
-                src="https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1920&q=80"
+                src="/images/hero-bg.jpg"
                 alt="Dyuthi Dance Studio"
                 fill
-                className="object-cover"
+                className="object-cover object-[center_15%]"
                 priority
             />
 
@@ -23,6 +23,7 @@ export default function HeroSection() {
                 <p className="text-lg md:text-xl text-white/80 mb-10 leading-relaxed">
                     Traverse into the boundless world of dance.
                 </p>
+
                 <a
                     href="#register"
                     className="inline-block px-8 py-3.5 text-base font-semibold text-white bg-[#D32F2F] rounded-lg hover:bg-[#B71C1C] transition-colors shadow-lg hover:shadow-xl"

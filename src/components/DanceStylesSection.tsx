@@ -1,10 +1,10 @@
 import Image from "next/image";
 
 const styles = [
-    { title: "Western Dance", image: "https://images.unsplash.com/photo-1605369062325-24231b409cb3?auto=format&fit=crop&w=800&q=80" },
-    { title: "Zumba Fitness", image: "https://images.unsplash.com/photo-1582914856411-d14fb619277d?auto=format&fit=crop&w=800&q=80" },
-    { title: "Bollywood", image: "https://images.unsplash.com/photo-1535597401618-91c62ee27f37?auto=format&fit=crop&w=800&q=80" },
-    { title: "Bharatanatyam", image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80", subtitle: "Led by Dona Benny" },
+    { title: "Western Dance", image: "/images/style-western.jpg" },
+    { title: "Zumba Fitness", image: "/images/style-zumba.jpg" },
+    { title: "Bollywood", image: "/images/style-bollywood.jpg" },
+    { title: "Bharatanatyam", image: "/images/style-classical.jpg", subtitle: "Led by Dona Benny" },
 ];
 
 export default function DanceStylesSection() {

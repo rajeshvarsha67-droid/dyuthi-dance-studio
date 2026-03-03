@@ -10,11 +10,11 @@ export default function Footer() {
                     <div>
                         <div className="flex items-center gap-3 mb-4">
                             <Image
-                                src="/images/logo.png"
+                                src="/images/logo-no-bg.png"
                                 alt="Dyuthi"
-                                width={40}
-                                height={40}
-                                className="object-contain brightness-200"
+                                width={80}
+                                height={80}
+                                className="object-contain"
                             />
                             <span className="text-xl font-bold">Dyuthi Dance Studio</span>
                         </div>

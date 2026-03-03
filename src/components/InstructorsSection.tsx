@@ -5,19 +5,22 @@ const instructors = [
         name: "Dona Benny",
         title: "Founder & Artistic Director",
         bio: "M.A. in Bharatanatyam with over 10 years of experience. Dona's passion for dance and commitment to nurturing talent is the heart of Dyuthi.",
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80",
+        image: "/images/instructor-dona.jpg",
+        objectPosition: "center 20%",
     },
     {
         name: "Tony",
         title: "Co-Founder",
         bio: "With 12+ years of experience spanning Bollywood, Western, and Zumba, Tony brings infectious energy and precision to every class.",
-        image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
+        image: "/images/instructor-tony.jpg",
+        objectPosition: "center",
     },
     {
         name: "Swaliha",
         title: "Choreographer",
         bio: "A dynamic talent with 3+ years of experience specializing in Western and Freestyle dance. Swaliha's creativity shines in every routine.",
-        image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=500&q=80",
+        image: "/images/instructor-swaliha.jpg",
+        objectPosition: "center",
     },
 ];
 
@@ -43,6 +46,7 @@ export default function InstructorsSection() {
                                     alt={inst.name}
                                     fill
                                     className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                    style={{ objectPosition: inst.objectPosition || "center" }}
                                 />
                             </div>
                             <h3 className="text-xl font-bold text-slate-900 mb-1">
