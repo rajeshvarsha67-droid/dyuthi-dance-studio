@@ -67,6 +67,9 @@ export default function RegistrationForm() {
         if (!supabase) return;
 
         const checkSession = async () => {
+            // TypeScript still requires the check because supabase could theoretically be reassigned, 
+            // though we know it won't be in this scope.
+            if (!supabase) return;
             const { data: { session } } = await supabase.auth.getSession();
             if (session?.user) {
                 handleUserLogin(session.user);
