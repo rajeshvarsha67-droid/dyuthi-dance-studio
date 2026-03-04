@@ -20,7 +20,7 @@ const instructors = [
         title: "Choreographer",
         bio: "A dynamic talent with 3+ years of experience specializing in Western and Freestyle dance. Swaliha's creativity shines in every routine.",
         image: "/images/instructor-swaliha.jpg",
-        objectPosition: "center",
+        objectPosition: "center 15%",
     },
 ];
 

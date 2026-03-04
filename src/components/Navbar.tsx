@@ -48,12 +48,18 @@ export default function Navbar() {
 
                 {/* Desktop Buttons */}
                 <div className="hidden lg:flex items-center gap-3">
-                    <button className="px-5 py-2 text-sm font-medium text-slate-900 border border-slate-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    <Link
+                        href="/#register"
+                        className="px-5 py-2 text-sm font-medium text-slate-900 border border-slate-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
                         Login
-                    </button>
-                    <button className="px-5 py-2 text-sm font-medium text-white bg-[#D32F2F] rounded-lg hover:bg-[#B71C1C] transition-colors">
+                    </Link>
+                    <Link
+                        href="/#register"
+                        className="px-5 py-2 text-sm font-medium text-white bg-[#D32F2F] rounded-lg hover:bg-[#B71C1C] transition-colors"
+                    >
                         Register
-                    </button>
+                    </Link>
                 </div>
 
                 {/* Mobile Toggle */}
@@ -83,12 +89,20 @@ export default function Navbar() {
                         ))}
                     </ul>
                     <div className="flex flex-col gap-3 mt-6">
-                        <button className="w-full px-5 py-2.5 text-sm font-medium text-slate-900 border border-slate-300 rounded-lg hover:bg-gray-50">
+                        <Link
+                            href="/#register"
+                            className="w-full px-5 py-2.5 text-sm font-medium text-slate-900 border border-slate-300 rounded-lg hover:bg-gray-50 text-center"
+                            onClick={() => setMobileOpen(false)}
+                        >
                             Login
-                        </button>
-                        <button className="w-full px-5 py-2.5 text-sm font-medium text-white bg-[#D32F2F] rounded-lg hover:bg-[#B71C1C]">
+                        </Link>
+                        <Link
+                            href="/#register"
+                            className="w-full px-5 py-2.5 text-sm font-medium text-white bg-[#D32F2F] rounded-lg hover:bg-[#B71C1C] text-center"
+                            onClick={() => setMobileOpen(false)}
+                        >
                             Register
-                        </button>
+                        </Link>
                     </div>
                 </div>
             )}
