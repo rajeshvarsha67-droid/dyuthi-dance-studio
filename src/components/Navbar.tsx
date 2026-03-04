@@ -22,17 +22,14 @@ export default function Navbar() {
         <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
                 {/* Logo */}
-                <Link href="/#home" className="flex items-center gap-3">
+                <Link href="/#home" className="flex items-center">
                     <Image
-                        src="/images/logo-no-bg.png"
+                        src="/images/new-logo-no-bg.png"
                         alt="Dyuthi Dance Studio"
-                        width={144}
-                        height={144}
-                        className="object-contain"
+                        width={120}
+                        height={60}
+                        className="object-contain max-h-[60px] w-auto"
                     />
-                    <span className="text-xl font-bold text-slate-900 hidden sm:block">
-                        Dyuthi
-                    </span>
                 </Link>
 
                 {/* Desktop Links */}

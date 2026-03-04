@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { MapPin, Phone, ExternalLink } from "lucide-react";
 
 export default function Footer() {
@@ -8,15 +7,8 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                     {/* About Column */}
                     <div>
-                        <div className="flex items-center gap-3 mb-4">
-                            <Image
-                                src="/images/logo-no-bg.png"
-                                alt="Dyuthi"
-                                width={80}
-                                height={80}
-                                className="object-contain"
-                            />
-                            <span className="text-xl font-bold">Dyuthi Dance Studio</span>
+                        <div className="mb-4">
+                            <h3 className="text-xl font-bold">Dyuthi Dance Studio</h3>
                         </div>
                         <p className="text-sm text-slate-400 leading-relaxed mb-4">
                             At Dyuthi, dance is joy, confidence, and connection. A welcoming
