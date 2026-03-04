@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
                 age: parseInt(body.age, 10),
                 phone: whatsapp,
                 email: body.email.trim().toLowerCase(),
-                dance_style: body.location,
+                Location: body.location,
                 preferred_batch: body.preferredBatch,
             })
             .select()
@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
             welcomeMessage = await generateWelcomeMessage({
                 name: data.name,
                 age: data.age,
-                location: data.dance_style,
+                location: data.Location,
                 preferredBatch: data.preferred_batch,
             });
 
@@ -135,7 +135,7 @@ export async function POST(request: NextRequest) {
                 .eq("id", data.id);
         } catch (aiError) {
             console.error("Welcome message error:", aiError);
-            const fallbackLocation = LOCATION_LABELS[data.dance_style] || data.dance_style;
+            const fallbackLocation = LOCATION_LABELS[data.Location] || data.Location;
             welcomeMessage = `A very warm welcome to the Dyuthi Dance Studio family! We are absolutely thrilled to have you join our ${fallbackLocation} and embark on your dance journey with us.`;
         }
 
