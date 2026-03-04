@@ -1,4 +1,4 @@
-import { MapPin, Phone, ExternalLink } from "lucide-react";
+import { MapPin, Phone, ExternalLink, Instagram } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -88,6 +88,15 @@ export default function Footer() {
                             >
                                 <Phone size={14} className="text-slate-500" />
                                 +91 89211 46960
+                            </a>
+                            <a
+                                href="https://www.instagram.com/dyuthi_dance_studio_/?hl=en"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
+                            >
+                                <Instagram size={14} className="text-pink-500" />
+                                @dyuthi_dance_studio_
                             </a>
                         </div>
                     </div>

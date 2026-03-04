@@ -20,15 +20,15 @@ export default function Navbar() {
 
     return (
         <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-24">
                 {/* Logo */}
-                <Link href="/#home" className="flex items-center">
+                <Link href="/#home" className="flex items-center mr-8">
                     <Image
                         src="/images/new-logo-no-bg.png"
                         alt="Dyuthi Dance Studio"
-                        width={120}
-                        height={60}
-                        className="object-contain max-h-[60px] w-auto"
+                        width={240}
+                        height={120}
+                        className="object-contain max-h-[120px] w-auto"
                     />
                 </Link>
 

@@ -4,7 +4,7 @@ const styles = [
     { title: "Western Dance", image: "/images/style-western.jpg" },
     { title: "Zumba Fitness", image: "/images/style-zumba.jpg" },
     { title: "Bollywood", image: "/images/style-bollywood.jpg" },
-    { title: "Bharatanatyam", image: "/images/style-classical.jpg", subtitle: "Led by Dona Benny" },
+    { title: "Bharatanatyam", image: "/images/style-classical.jpg" },
 ];
 
 export default function DanceStylesSection() {
@@ -37,9 +37,6 @@ export default function DanceStylesSection() {
                                 <h3 className="text-xl font-bold text-white mb-1">
                                     {style.title}
                                 </h3>
-                                {style.subtitle && (
-                                    <p className="text-sm text-white/70">{style.subtitle}</p>
-                                )}
                             </div>
                         </div>
                     ))}
