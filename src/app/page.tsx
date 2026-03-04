@@ -6,6 +6,7 @@ import InstructorsSection from "@/components/InstructorsSection";
 import ReviewsSection from "@/components/ReviewsSection";
 import ClassTimingsSection from "@/components/ClassTimingsSection";
 import RegistrationForm from "@/components/RegistrationForm";
+import GallerySection from "@/components/GallerySection";
 import Footer from "@/components/Footer";
 import WhatsAppFAB from "@/components/WhatsAppFAB";
 
@@ -19,6 +20,7 @@ export default function Home() {
                 <DanceStylesSection />
                 <InstructorsSection />
                 <ReviewsSection />
+                <GallerySection />
                 <ClassTimingsSection />
                 <RegistrationForm />
             </main>
