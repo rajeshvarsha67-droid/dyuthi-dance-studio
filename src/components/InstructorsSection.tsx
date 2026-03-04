@@ -20,7 +20,8 @@ const instructors = [
         title: "Choreographer",
         bio: "A dynamic talent with 3+ years of experience specializing in Western and Freestyle dance. Swaliha's creativity shines in every routine.",
         image: "/images/instructor-swaliha.jpg",
-        objectPosition: "center 15%",
+        objectPosition: "center 30%",
+        scale: "1.3",
     },
 ];
 
@@ -46,7 +47,10 @@ export default function InstructorsSection() {
                                     alt={inst.name}
                                     fill
                                     className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                    style={{ objectPosition: inst.objectPosition || "center" }}
+                                    style={{
+                                        objectPosition: inst.objectPosition || "center",
+                                        ...(inst.scale ? { transform: `scale(${inst.scale})` } : {}),
+                                    }}
                                 />
                             </div>
                             <h3 className="text-xl font-bold text-slate-900 mb-1">
