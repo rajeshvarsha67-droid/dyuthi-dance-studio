@@ -67,6 +67,21 @@ export default function ReviewsSection() {
                         ))}
                     </div>
                 </div>
+
+                {/* Google Reviews CTA */}
+                <div className="text-center mt-12">
+                    <a
+                        href="https://www.google.com/search?sca_esv=ad175a4a610f2e0b&rlz=1C1YTUH_enIN1158IN1158&sxsrf=ANbL-n55OEZe4LX1XSVEPBQtSBrAjIseog:1772651610819&q=dyuthi+dance+studio&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOcAxNSGbFS5ClO5Er8o-K43bZgGu2wLGkMz5pbN8xnxz0rdz9dV4mIJIesEOCvZ9DuGyjgprDpUyIYSD24Yq76cLl3VSR0OuJap7ufYg3jjxBv77Tw%3D%3D&sa=X&sqi=2&ved=2ahUKEwjh9crs-YaTAxW6SWwGHRSBFxMQrrQLegQIHRAA&biw=1920&bih=945&dpr=1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-8 py-3.5 bg-white border-2 border-[#D32F2F] text-[#D32F2F] font-semibold rounded-full hover:bg-[#D32F2F] hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                        </svg>
+                        See All Reviews on Google
+                    </a>
+                </div>
             </div>
         </section>
     );
