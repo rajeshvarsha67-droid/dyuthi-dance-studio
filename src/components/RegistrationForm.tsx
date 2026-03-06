@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, type FormEvent } from "react";
-import { UserPlus, Loader2, CheckCircle2, XCircle, LogIn, LogOut } from "lucide-react";
+import { useState, useEffect, useRef, useCallback, type FormEvent } from "react";
+import { UserPlus, Loader2, CheckCircle2, XCircle, LogIn, LogOut, Mail, RefreshCw } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import type { User } from "@supabase/supabase-js";
 
@@ -48,7 +48,7 @@ const initialFormData: IRegistrationForm = {
     preferredBatch: "",
 };
 
-type AuthMode = "signup" | "login" | "authenticated";
+type AuthMode = "signup" | "login" | "authenticated" | "verify_otp";
 
 export default function RegistrationForm() {
     const [formData, setFormData] = useState<IRegistrationForm>(initialFormData);
@@ -61,6 +61,13 @@ export default function RegistrationForm() {
         message: string;
     } | null>(null);
     const [welcomeMessage, setWelcomeMessage] = useState<string | null>(null);
+
+    // OTP verification state
+    const [otpCode, setOtpCode] = useState("");
+    const [signupEmail, setSignupEmail] = useState("");
+    const [pendingFormData, setPendingFormData] = useState<IRegistrationForm | null>(null);
+    const [resendCooldown, setResendCooldown] = useState(0);
+    const cooldownRef = useRef<NodeJS.Timeout | null>(null);
 
     // Check for existing session on mount
     useEffect(() => {
@@ -89,6 +96,14 @@ export default function RegistrationForm() {
 
         return () => subscription.unsubscribe();
     }, []);
+
+    // Countdown timer for resend cooldown
+    useEffect(() => {
+        if (resendCooldown > 0) {
+            cooldownRef.current = setTimeout(() => setResendCooldown((c) => c - 1), 1000);
+            return () => { if (cooldownRef.current) clearTimeout(cooldownRef.current); };
+        }
+    }, [resendCooldown]);
 
     const handleUserLogin = (user: User) => {
         setUser(user);
@@ -189,6 +204,34 @@ export default function RegistrationForm() {
                 if (error) throw error;
                 // Success: onAuthStateChange will handle transition to "authenticated"
 
+            } else if (authMode === "verify_otp") {
+                // OTP Verification step
+                if (!otpCode || otpCode.length !== 6) {
+                    setSubmitStatus({ type: "error", message: "Please enter the 6-digit code from your email." });
+                    setIsLoading(false);
+                    return;
+                }
+
+                // Try verifying with type 'email' first, fall back to 'signup'
+                const { error: verifyError } = await supabase.auth.verifyOtp({
+                    email: signupEmail,
+                    token: otpCode,
+                    type: "email",
+                });
+
+                if (verifyError) {
+                    // Fallback: try with type 'signup' in case the token was generated differently
+                    const { error: fallbackError } = await supabase.auth.verifyOtp({
+                        email: signupEmail,
+                        token: otpCode,
+                        type: "signup",
+                    });
+                    if (fallbackError) throw fallbackError;
+                }
+
+                // OTP verified — now submit class registration
+                await submitClassRegistration(pendingFormData!);
+
             } else {
                 // Sign Up or already Authenticated class registration
                 if (authMode === "signup") {
@@ -206,50 +249,91 @@ export default function RegistrationForm() {
                     });
 
                     if (signUpError) throw signUpError;
-                }
 
-                // 2. Submit the class registration to our backend
-                const res = await fetch("/api/register", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        name: formData.name,
-                        age: formData.age,
-                        whatsapp: formData.whatsapp,
-                        email: formData.email,
-                        location: formData.location,
-                        preferredBatch: formData.preferredBatch,
-                    }), // Explicitly omit password
-                });
-
-                const data = await res.json();
-
-                if (res.ok) {
+                    // Transition to OTP verification screen
+                    setSignupEmail(formData.email);
+                    setPendingFormData({ ...formData });
+                    setAuthMode("verify_otp");
+                    setOtpCode("");
+                    setResendCooldown(60);
                     setSubmitStatus({
                         type: "success",
-                        message: data.message || "Registration successful! We will contact you shortly.",
+                        message: `We've sent a 6-digit verification code to ${formData.email}. Please check your inbox (and spam folder).`,
                     });
-                    if (data.welcomeMessage) {
-                        setWelcomeMessage(data.welcomeMessage);
-                    }
-                    if (authMode === "signup") {
-                        // Keep user data if they just signed up, but clear batch
-                        setFormData(prev => ({ ...prev, location: "", preferredBatch: "", password: "" }));
-                    } else {
-                        setFormData(prev => ({ ...prev, location: "", preferredBatch: "" }));
-                    }
-                    setErrors({});
-                } else {
-                    setSubmitStatus({
-                        type: "error",
-                        message: data.error || "Something went wrong. Please try again.",
-                    });
+                    setIsLoading(false);
+                    return;
                 }
+
+                // Already authenticated — just submit class registration
+                await submitClassRegistration(formData);
             }
         } catch (error: any) {
             setSubmitStatus({
                 type: "error",
                 message: error.message || "An unexpected error occurred. Please try again.",
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // Submit class registration to backend API
+    const submitClassRegistration = async (data: IRegistrationForm) => {
+        const res = await fetch("/api/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: data.name,
+                age: data.age,
+                whatsapp: data.whatsapp,
+                email: data.email,
+                location: data.location,
+                preferredBatch: data.preferredBatch,
+            }),
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+            setSubmitStatus({
+                type: "success",
+                message: result.message || "Registration successful! We will contact you shortly.",
+            });
+            if (result.welcomeMessage) {
+                setWelcomeMessage(result.welcomeMessage);
+            }
+            setPendingFormData(null);
+            setOtpCode("");
+            setSignupEmail("");
+            setFormData((prev) => ({ ...prev, location: "", preferredBatch: "", password: "" }));
+            setErrors({});
+        } else {
+            setSubmitStatus({
+                type: "error",
+                message: result.error || "Something went wrong. Please try again.",
+            });
+        }
+    };
+
+    // Resend OTP email
+    const handleResendOtp = async () => {
+        if (!supabase || resendCooldown > 0) return;
+        setIsLoading(true);
+        try {
+            const { error } = await supabase.auth.resend({
+                email: signupEmail,
+                type: "signup",
+            });
+            if (error) throw error;
+            setResendCooldown(60);
+            setSubmitStatus({
+                type: "success",
+                message: `A new verification code has been sent to ${signupEmail}.`,
+            });
+        } catch (error: any) {
+            setSubmitStatus({
+                type: "error",
+                message: error.message || "Failed to resend code. Please try again.",
             });
         } finally {
             setIsLoading(false);
@@ -288,7 +372,9 @@ export default function RegistrationForm() {
                             ? "Log In to Your Account"
                             : authMode === "authenticated"
                                 ? "Register for a Class"
-                                : "Sign Up & Register"}
+                                : authMode === "verify_otp"
+                                    ? "Verify Your Email"
+                                    : "Sign Up & Register"}
                     </h2>
 
                     {authMode === 'authenticated' && user && (
@@ -323,8 +409,8 @@ export default function RegistrationForm() {
                     className="bg-white rounded-2xl border border-gray-200 shadow-lg p-8 flex flex-col gap-5"
                     noValidate
                 >
-                    {/* Basic Info - Hidden if just logging in */}
-                    {authMode !== "login" && (
+                    {/* Basic Info - Hidden if just logging in or verifying OTP */}
+                    {authMode !== "login" && authMode !== "verify_otp" && (
                         <>
                             {/* Name */}
                             <div>
@@ -371,8 +457,8 @@ export default function RegistrationForm() {
                         </>
                     )}
 
-                    {/* Email - Used in all modes */}
-                    {authMode !== "authenticated" && (
+                    {/* Email - Used in signup and login modes */}
+                    {authMode !== "authenticated" && authMode !== "verify_otp" && (
                         <div>
                             <label className="block text-sm font-medium text-slate-700 mb-1.5">Email Address</label>
                             <input
@@ -388,7 +474,7 @@ export default function RegistrationForm() {
                     )}
 
                     {/* Password */}
-                    {authMode !== "authenticated" && (
+                    {authMode !== "authenticated" && authMode !== "verify_otp" && (
                         <div>
                             <label className="block text-sm font-medium text-slate-700 mb-1.5">Password</label>
                             <input
@@ -403,8 +489,8 @@ export default function RegistrationForm() {
                         </div>
                     )}
 
-                    {/* Class Details - Hidden in Login mode */}
-                    {authMode !== "login" && (
+                    {/* Class Details - Hidden in Login and OTP mode */}
+                    {authMode !== "login" && authMode !== "verify_otp" && (
                         <div className="pt-2 border-t mt-2 border-gray-100 flex flex-col gap-5">
                             {/* Location */}
                             <div>
@@ -443,6 +529,41 @@ export default function RegistrationForm() {
                         </div>
                     )}
 
+                    {/* OTP Verification UI */}
+                    {authMode === "verify_otp" && (
+                        <div className="flex flex-col items-center gap-5">
+                            <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center">
+                                <Mail size={28} className="text-blue-500" />
+                            </div>
+                            <p className="text-sm text-slate-600 text-center">
+                                Enter the 6-digit code sent to <strong className="text-slate-800">{signupEmail}</strong>
+                            </p>
+
+                            {/* OTP Input */}
+                            <input
+                                type="text"
+                                inputMode="numeric"
+                                maxLength={6}
+                                placeholder="000000"
+                                value={otpCode}
+                                onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                                className="w-48 text-center text-2xl font-mono tracking-[0.5em] px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 border-gray-300"
+                                autoFocus
+                            />
+
+                            {/* Resend */}
+                            <button
+                                type="button"
+                                onClick={handleResendOtp}
+                                disabled={resendCooldown > 0 || isLoading}
+                                className="flex items-center gap-1.5 text-sm text-[#D32F2F] font-medium hover:underline disabled:text-gray-400 disabled:no-underline disabled:cursor-not-allowed transition-colors"
+                            >
+                                <RefreshCw size={14} />
+                                {resendCooldown > 0 ? `Resend code in ${resendCooldown}s` : "Resend verification code"}
+                            </button>
+                        </div>
+                    )}
+
                     {/* Submit */}
                     <button
                         type="submit"
@@ -450,17 +571,17 @@ export default function RegistrationForm() {
                         className="w-full mt-4 flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-[#D32F2F] rounded-lg hover:bg-[#B71C1C] transition-colors shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                         {isLoading ? (
-                            <><Loader2 size={18} className="animate-spin" /> {authMode === "login" ? "Logging In..." : "Submitting..."}</>
+                            <><Loader2 size={18} className="animate-spin" /> {authMode === "login" ? "Logging In..." : authMode === "verify_otp" ? "Verifying..." : "Submitting..."}</>
                         ) : (
                             <>
-                                {authMode === "login" ? <LogIn size={18} /> : <UserPlus size={18} />}
-                                {authMode === "login" ? "Log In" : authMode === "authenticated" ? "Complete Registration" : "Sign Up & Register"}
+                                {authMode === "login" ? <LogIn size={18} /> : authMode === "verify_otp" ? <CheckCircle2 size={18} /> : <UserPlus size={18} />}
+                                {authMode === "login" ? "Log In" : authMode === "authenticated" ? "Complete Registration" : authMode === "verify_otp" ? "Verify & Complete Registration" : "Sign Up & Register"}
                             </>
                         )}
                     </button>
 
                     {/* Mode Toggle */}
-                    {authMode !== "authenticated" && (
+                    {authMode !== "authenticated" && authMode !== "verify_otp" && (
                         <p className="text-center text-sm text-slate-600 mt-2">
                             {authMode === "signup" ? "Already have an account? " : "Don't have an account? "}
                             <button
@@ -473,6 +594,25 @@ export default function RegistrationForm() {
                                 className="font-semibold text-[#D32F2F] hover:underline"
                             >
                                 {authMode === "signup" ? "Log in here" : "Sign up"}
+                            </button>
+                        </p>
+                    )}
+                    {authMode === "verify_otp" && (
+                        <p className="text-center text-sm text-slate-600 mt-2">
+                            Wrong email?{" "}
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setAuthMode("signup");
+                                    setOtpCode("");
+                                    setSignupEmail("");
+                                    setPendingFormData(null);
+                                    setSubmitStatus(null);
+                                    setResendCooldown(0);
+                                }}
+                                className="font-semibold text-[#D32F2F] hover:underline"
+                            >
+                                Go back to sign up
                             </button>
                         </p>
                     )}

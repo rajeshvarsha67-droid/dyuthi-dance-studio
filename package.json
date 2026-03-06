@@ -6,7 +6,10 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "cf:build": "npx @opennextjs/cloudflare build",
+        "preview": "npm run cf:build && wrangler dev",
+        "deploy": "npm run cf:build && wrangler deploy"
     },
     "dependencies": {
         "@google/generative-ai": "^0.24.1",
@@ -25,6 +28,8 @@
         "typescript": "^5.9.3"
     },
     "devDependencies": {
-        "@netlify/plugin-nextjs": "^5.15.8"
+        "@netlify/plugin-nextjs": "^5.15.8",
+        "@opennextjs/cloudflare": "^1.17.1",
+        "wrangler": "^4.71.0"
     }
 }

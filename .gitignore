@@ -39,3 +39,7 @@ Thumbs.db
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Cloudflare OpenNext
+.open-next/
+.wrangler/
