@@ -206,8 +206,8 @@ export default function RegistrationForm() {
 
             } else if (authMode === "verify_otp") {
                 // OTP Verification step
-                if (!otpCode || otpCode.length !== 6) {
-                    setSubmitStatus({ type: "error", message: "Please enter the 6-digit code from your email." });
+                if (!otpCode || otpCode.length !== 8) {
+                    setSubmitStatus({ type: "error", message: "Please enter the 8-digit code from your email." });
                     setIsLoading(false);
                     return;
                 }
@@ -258,7 +258,7 @@ export default function RegistrationForm() {
                     setResendCooldown(60);
                     setSubmitStatus({
                         type: "success",
-                        message: `We've sent a 6-digit verification code to ${formData.email}. Please check your inbox (and spam folder).`,
+                        message: `We've sent an 8-digit verification code to ${formData.email}. Please check your inbox (and spam folder).`,
                     });
                     setIsLoading(false);
                     return;
@@ -536,17 +536,17 @@ export default function RegistrationForm() {
                                 <Mail size={28} className="text-blue-500" />
                             </div>
                             <p className="text-sm text-slate-600 text-center">
-                                Enter the 6-digit code sent to <strong className="text-slate-800">{signupEmail}</strong>
+                                Enter the 8-digit code sent to <strong className="text-slate-800">{signupEmail}</strong>
                             </p>
 
                             {/* OTP Input */}
                             <input
                                 type="text"
                                 inputMode="numeric"
-                                maxLength={6}
-                                placeholder="000000"
+                                maxLength={8}
+                                placeholder="00000000"
                                 value={otpCode}
-                                onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                                onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 8))}
                                 className="w-48 text-center text-2xl font-mono tracking-[0.5em] px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 border-gray-300"
                                 autoFocus
                             />
