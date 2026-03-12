@@ -26,7 +26,7 @@ export default function HeroSection() {
 
                 <a
                     href="#register"
-                    className="inline-block px-8 py-3.5 text-base font-semibold text-white bg-[#D32F2F] rounded-lg hover:bg-[#B71C1C] transition-colors shadow-lg hover:shadow-xl"
+                    className="inline-block px-8 py-3.5 text-base font-semibold text-white rounded-lg skeuo-btn-primary"
                 >
                     Join a Batch
                 </a>

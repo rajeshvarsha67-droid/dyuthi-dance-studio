@@ -1,0 +1,12 @@
+[
+  {
+    "message": [
+      "Ô¿»",
+      "ChunkLoadError: Failed to load chunk server/chunks/ssr/[root-of-the-server]__63bf3b07._.js from runtime for chunk server/app/page.js"
+    ],
+    "level": "error",
+    "timestamp": 1772894620523
+  }
+]
+
+[]

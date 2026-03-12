@@ -5,3 +5,158 @@
   --color-accent-hover: #B71C1C;
   --font-family-sans: "Montserrat", sans-serif;
 }
+
+@layer utilities {
+  /* 1. Global Illumination & Lighting */
+  /* Intense physical footprint, stacked shadows */
+  .skeuo-panel {
+    background: linear-gradient(135deg, #fdfdfd 0%, #e6e6e6 100%);
+    box-shadow: 
+      12px 12px 30px rgba(0, 0, 0, 0.15), 
+      -10px -10px 20px rgba(255, 255, 255, 0.9), 
+      inset 1px 1px 2px rgba(255, 255, 255, 0.8),
+      inset -1px -1px 2px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  /* Dark mode variant for panel */
+  .dark .skeuo-panel {
+    background: linear-gradient(135deg, #2a2e35 0%, #1c1e23 100%);
+    box-shadow: 
+      15px 15px 35px rgba(0, 0, 0, 0.6), 
+      -10px -10px 20px rgba(255, 255, 255, 0.05),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.1),
+      inset -1px -1px 3px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Recessed tracks and inputs */
+  .skeuo-inset {
+    background: linear-gradient(135deg, #d4d4d4 0%, #f9f9f9 100%);
+    box-shadow: 
+      inset 8px 8px 15px rgba(0, 0, 0, 0.15), 
+      inset -8px -8px 15px rgba(255, 255, 255, 0.8),
+      1px 1px 1px rgba(255, 255, 255, 0.9);
+  }
+
+  .dark .skeuo-inset {
+    background: linear-gradient(135deg, #16181b 0%, #202328 100%);
+    box-shadow:  
+      inset 8px 8px 15px rgba(0, 0, 0, 0.8), 
+      inset -8px -8px 15px rgba(255, 255, 255, 0.04),
+      1px 1px 1px rgba(255, 255, 255, 0.05);
+  }
+
+  /* Physical Buttons */
+  .skeuo-btn {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow:  
+      6px 6px 12px rgba(0, 0, 0, 0.15), 
+      -6px -6px 12px rgba(255, 255, 255, 0.9),
+      inset 1px 1px 2px rgba(255, 255, 255, 1);
+    transition: all 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .skeuo-btn:hover {
+    box-shadow:  
+      8px 8px 16px rgba(0, 0, 0, 0.12), 
+      -8px -8px 16px rgba(255, 255, 255, 1),
+      inset 1px 1px 2px rgba(255, 255, 255, 1);
+    transform: translateY(-1px) translateX(-1px);
+  }
+
+  /* Physically depress button */
+  .skeuo-btn:active {
+    box-shadow: 
+      inset 4px 4px 8px rgba(0, 0, 0, 0.1), 
+      inset -4px -4px 8px rgba(255, 255, 255, 0.6),
+      0px 0px 0px rgba(0, 0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transform: translateY(2px) translateX(2px);
+  }
+
+  /* Primary Button (Accent colored) */
+  .skeuo-btn-primary {
+    border: 1px solid rgba(255, 120, 120, 0.8);
+    background: linear-gradient(145deg, #d93838, #b32424);
+    box-shadow:  
+      8px 8px 16px rgba(0, 0, 0, 0.25), 
+      -4px -4px 10px rgba(255, 255, 255, 0.5),
+      inset 1px 1px 3px rgba(255, 255, 255, 0.4),
+      inset -1px -1px 3px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    transition: all 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .dark .skeuo-btn-primary {
+    box-shadow:  
+      8px 8px 16px rgba(0, 0, 0, 0.6), 
+      -4px -4px 10px rgba(255, 255, 255, 0.05),
+      inset 1px 1px 3px rgba(255, 255, 255, 0.2),
+      inset -1px -1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  .skeuo-btn-primary:hover {
+    box-shadow:  
+      10px 10px 20px rgba(0, 0, 0, 0.2), 
+      -6px -6px 14px rgba(255, 255, 255, 0.6),
+      inset 1px 1px 4px rgba(255, 255, 255, 0.5);
+    transform: translateY(-1px) translateX(-1px);
+    background: linear-gradient(145deg, #e63e3e, #ba2828);
+  }
+
+  .skeuo-btn-primary:active {
+    box-shadow: 
+      inset 4px 4px 10px rgba(0,0,0,0.4), 
+      inset -2px -2px 5px rgba(255,255,255,0.1),
+      0px 0px 0px rgba(0, 0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    transform: translateY(2px) translateX(2px);
+  }
+
+  /* Text engraving effect */
+  .skeuo-text {
+    color: #4b5563;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.8), -1px -1px 0px rgba(0,0,0,0.05);
+  }
+  
+  .dark .skeuo-text {
+    color: #9ca3af;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.8), -1px -1px 0px rgba(255,255,255,0.05);
+  }
+
+  /* Architectural Glassmorphism */
+  .skeuo-glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      10px 10px 30px rgba(0, 0, 0, 0.1),
+      inset 20px 20px 40px rgba(255, 255, 255, 0.2),
+      inset -20px -20px 40px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Metallic Plate (Brushed steel look) */
+  .skeuo-metal-plate {
+    background: linear-gradient(105deg, #e2e2e2 0%, #fdfdfd 20%, #e2e2e2 40%, #c8c8c8 80%, #a8a8a8 100%);
+    box-shadow: 
+      5px 5px 15px rgba(0, 0, 0, 0.2), 
+      -5px -5px 15px rgba(255, 255, 255, 0.8),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.9),
+      inset -1px -1px 1px rgba(0, 0, 0, 0.2);
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+  }
+  
+  /* Focus rings for accessibility that respect skeuo style */
+  .skeuo-focus:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.3), inset 2px 2px 5px #d9d9d9, inset -2px -2px 5px #ffffff;
+  }
+}

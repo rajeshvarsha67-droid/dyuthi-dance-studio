@@ -1,0 +1,189 @@
+﻿­ƒ¬Á  Writing logs to "C:\Users\USER\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-03-07_13-59-56_551.log"
+.env file not found at "D:\dyuthi-dance-studio\.env". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+
+ Ôøà´©Å wrangler 4.71.0
+ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"ca9c8216-26e0-444f-849d-2b61817bc757","event":"wrangler command started","timestamp":1772891996671,"properties":{"amplitude_session_id":1772891996669,"amplitude_event_id":0,"wranglerVersion":"4.71.0","wranglerMajorVersion":4,"wranglerMinorVersion":71,"wranglerPatchVersion":0,"osPlatform":"Windows","osVersion":"Windows 11 Pro","nodeVersion":24,"packageManager":"npm","isFirstUsage":false,"configFileType":"jsonc","isCI":true,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":true,"agent":null,"argsUsed":[],"argsCombination":"","sanitizedCommand":"deploy","sanitizedArgs":{}}}.
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"ca9c8216-26e0-444f-849d-2b61817bc757","event":"autoconfig_process_started","timestamp":1772891996677,"properties":{"amplitude_session_id":1772891996677,"amplitude_event_id":0,"wranglerVersion":"4.71.0","wranglerMajorVersion":4,"wranglerMinorVersion":71,"wranglerPatchVersion":0,"osPlatform":"Windows","osVersion":"Windows 11 Pro","nodeVersion":24,"packageManager":"npm","isFirstUsage":false,"configFileType":"none","isCI":true,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":null,"category":"Workers","os":"win32:x64","autoConfigId":"bedfaa75-96a9-4462-9e8d-ee8ba6c831cc","command":"wrangler deploy","dryRun":false}}.
+Running autoconfig detection in D:\dyuthi-dance-studio...
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"ca9c8216-26e0-444f-849d-2b61817bc757","event":"autoconfig_detection_started","timestamp":1772891996678,"properties":{"amplitude_session_id":1772891996677,"amplitude_event_id":0,"wranglerVersion":"4.71.0","wranglerMajorVersion":4,"wranglerMinorVersion":71,"wranglerPatchVersion":0,"osPlatform":"Windows","osVersion":"Windows 11 Pro","nodeVersion":24,"packageManager":"npm","isFirstUsage":false,"configFileType":"none","isCI":true,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":null,"category":"Workers","os":"win32:x64","autoConfigId":"bedfaa75-96a9-4462-9e8d-ee8ba6c831cc","command":"wrangler deploy"}}.
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"ca9c8216-26e0-444f-849d-2b61817bc757","event":"autoconfig_process_ended","timestamp":1772891996678,"properties":{"amplitude_session_id":1772891996678,"amplitude_event_id":0,"wranglerVersion":"4.71.0","wranglerMajorVersion":4,"wranglerMinorVersion":71,"wranglerPatchVersion":0,"osPlatform":"Windows","osVersion":"Windows 11 Pro","nodeVersion":24,"packageManager":"npm","isFirstUsage":false,"configFileType":"none","isCI":true,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":null,"category":"Workers","os":"win32:x64","autoConfigId":"bedfaa75-96a9-4462-9e8d-ee8ba6c831cc","command":"wrangler deploy","dryRun":false,"success":true}}.
+OpenNext project detected, calling `opennextjs-cloudflare deploy`
+Using npm as package manager.
+
+ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ
+Ôöé OpenNext ÔÇö Cloudflare deploy Ôöé
+ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ
+
+node.exe : WARN 
+OpenNext is not fully 
+compatible with 
+Windows.
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (WARN OpenNext   
+  i...e with Window    
+s.:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+WARN For optimal 
+performance, it is 
+recommended to use 
+Windows Subsystem for 
+Linux (WSL).
+WARN While OpenNext 
+may function on 
+Windows, it could 
+encounter 
+unpredictable failures 
+during runtime.
+­ƒ¬Á  Writing logs to "C:\Users\USER\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-03-07_13-59-58_110.log"
+local dev variables file not found at ".dev.vars". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+Incremental cache does not need populating
+Tag cache does not need populating
+­ƒ¬Á  Writing logs to "C:\Users\USER\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-03-07_13-59-59_243.log"
+.env file not found at "D:\dyuthi-dance-studio\.env". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+
+ Ôøà´©Å wrangler 4.71.0
+ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"ca9c8216-26e0-444f-849d-2b61817bc757","event":"wrangler command started","timestamp":1772891999365,"properties":{"amplitude_session_id":1772891999363,"amplitude_event_id":0,"wranglerVersion":"4.71.0","wranglerMajorVersion":4,"wranglerMinorVersion":71,"wranglerPatchVersion":0,"osPlatform":"Windows","osVersion":"Windows 11 Pro","nodeVersion":24,"packageManager":"npm","isFirstUsage":false,"configFileType":"jsonc","isCI":true,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":true,"agent":null,"argsUsed":[],"argsCombination":"","sanitizedCommand":"deploy","sanitizedArgs":{}}}.
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"ca9c8216-26e0-444f-849d-2b61817bc757","event":"autoconfig_process_started","timestamp":1772891999370,"properties":{"amplitude_session_id":1772891999370,"amplitude_event_id":0,"wranglerVersion":"4.71.0","wranglerMajorVersion":4,"wranglerMinorVersion":71,"wranglerPatchVersion":0,"osPlatform":"Windows","osVersion":"Windows 11 Pro","nodeVersion":24,"packageManager":"npm","isFirstUsage":false,"configFileType":"none","isCI":true,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":null,"category":"Workers","os":"win32:x64","autoConfigId":"3d6023d9-9c9d-42d9-96c9-6f635da4baa5","command":"wrangler deploy","dryRun":false}}.
+Running autoconfig detection in D:\dyuthi-dance-studio...
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"ca9c8216-26e0-444f-849d-2b61817bc757","event":"autoconfig_detection_started","timestamp":1772891999371,"properties":{"amplitude_session_id":1772891999371,"amplitude_event_id":0,"wranglerVersion":"4.71.0","wranglerMajorVersion":4,"wranglerMinorVersion":71,"wranglerPatchVersion":0,"osPlatform":"Windows","osVersion":"Windows 11 Pro","nodeVersion":24,"packageManager":"npm","isFirstUsage":false,"configFileType":"none","isCI":true,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":null,"category":"Workers","os":"win32:x64","autoConfigId":"3d6023d9-9c9d-42d9-96c9-6f635da4baa5","command":"wrangler deploy"}}.
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"ca9c8216-26e0-444f-849d-2b61817bc757","event":"autoconfig_process_ended","timestamp":1772891999371,"properties":{"amplitude_session_id":1772891999371,"amplitude_event_id":0,"wranglerVersion":"4.71.0","wranglerMajorVersion":4,"wranglerMinorVersion":71,"wranglerPatchVersion":0,"osPlatform":"Windows","osVersion":"Windows 11 Pro","nodeVersion":24,"packageManager":"npm","isFirstUsage":false,"configFileType":"none","isCI":true,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":null,"category":"Workers","os":"win32:x64","autoConfigId":"3d6023d9-9c9d-42d9-96c9-6f635da4baa5","command":"wrangler deploy","dryRun":false,"success":true}}.
+Starting verifyWorkerMatchesCITag() with tag: undefined, name: dyuthi-dance-studio
+No WRANGLER_CI_MATCH_TAG variable provided, aborting verifyWorkerMatchesCITag()
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/453ff05113690cf103fa7b84d2e9475d/workers/services/dyuthi-dance-studio
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/453ff05113690cf103fa7b84d2e9475d/workers/scripts/dyuthi-dance-studio/deployments
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+Writing additional module to output D:\dyuthi-dance-studio\.wrangler\tmp\deploy-Ng95An\77d9faebf7af9e421806970ce10a58e9d83116d7-resvg.wasm?module
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"ca9c8216-26e0-444f-849d-2b61817bc757","event":"wrangler command errored","timestamp":1772892008148,"properties":{"amplitude_session_id":1772891999363,"amplitude_event_id":1,"wranglerVersion":"4.71.0","wranglerMajorVersion":4,"wranglerMinorVersion":71,"wranglerPatchVersion":0,"osPlatform":"Windows","osVersion":"Windows 11 Pro","nodeVersion":24,"packageManager":"npm","isFirstUsage":false,"configFileType":"jsonc","isCI":true,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":true,"agent":null,"argsUsed":[],"argsCombination":"","sanitizedCommand":"deploy","sanitizedArgs":{},"durationMs":8792,"errorType":"FileNotFoundError"}}.
+
+File not found error: ENOENT: no such file or directory, open 'D:\dyuthi-dance-studio\.wrangler\tmp\deploy-Ng95An\77d9faebf7af9e421806970ce10a58e9d83116d7-resvg.wasm?module'
+[31mX [41;31m[[41;97
+mERROR[41;31m][0m 
+[1mA file or 
+directory could not be 
+found.[0m
+
+  
+  Missing file or 
+directory: D:\dyuthi-da
+nce-studio\.wrangler\tm
+p\deploy-Ng95An\77d9fae
+bf7af9e421806970ce10a58
+e9d83116d7-resvg.wasm?m
+odule
+  
+  This is typically 
+caused by:
+    - The file or 
+directory does not 
+exist
+    - A typo in the 
+file path
+    - The file was 
+moved or deleted
+  
+  Please check the 
+file path and try 
+again.
+
+
+ƒ¬Á  Logs were written 
+to "C:\Users\USER\AppDa
+ta\Roaming\xdg.config\.
+wrangler\logs\wrangler-
+2026-03-07_13-59-59_243
+.log"
+ERROR Wrangler deploy 
+command failed:
+[31mX [41;31m[[41;97
+mERROR[41;31m][0m 
+[1mA file or 
+directory could not be 
+found.[0m
+
+  
+  Missing file or 
+directory: D:\dyuthi-da
+nce-studio\.wrangler\tm
+p\deploy-Ng95An\77d9fae
+bf7af9e421806970ce10a58
+e9d83116d7-resvg.wasm?m
+odule
+  
+  This is typically 
+caused by:
+    - The file or 
+directory does not 
+exist
+    - A typo in the 
+file path
+    - The file was 
+moved or deleted
+  
+  Please check the 
+file path and try 
+again.
+
+
+ƒ¬Á  Logs were written 
+to "C:\Users\USER\AppDa
+ta\Roaming\xdg.config\.
+wrangler\logs\wrangler-
+2026-03-07_13-59-59_243
+.log"
+
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"ca9c8216-26e0-444f-849d-2b61817bc757","event":"wrangler command errored","timestamp":1772892008242,"properties":{"amplitude_session_id":1772891996669,"amplitude_event_id":1,"wranglerVersion":"4.71.0","wranglerMajorVersion":4,"wranglerMinorVersion":71,"wranglerPatchVersion":0,"osPlatform":"Windows","osVersion":"Windows 11 Pro","nodeVersion":24,"packageManager":"npm","isFirstUsage":false,"configFileType":"jsonc","isCI":true,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":true,"agent":null,"argsUsed":[],"argsCombination":"","sanitizedCommand":"deploy","sanitizedArgs":{},"durationMs":11579,"errorType":"Error"}}.
+
+[31mX [41;31m[[41;97
+mERROR[41;31m][0m 
+[1m[0m
+
+
+Error
+    at ChildProcess.<anonymous> (D:\dyuthi-dance-studio\node_modules\wrangler\wrangler-dist\cli.js:216451:24)
+    at ChildProcess.emit (node:events:508:28)
+    at ChildProcess.emit (node:domain:489:12)
+    at cp3.emit (D:\dyuthi-dance-studio\node_modules\wrangler\wrangler-dist\cli.js:126647:29)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:305:5)
+[32mIf you think this is a bug then please create an issue at https://github.com/cloudflare/workers-sdk/issues/new/choose[0m
+? Would you like to report this error to Cloudflare? Wrangler's output and the error details will be shared with the Wrangler team to help us diagnose and fix the issue.
+­ƒñû Using fallback value in non-interactive context: no
+Sentry: Reporting disabled - would have sent Error.
+ƒ¬Á  Logs were written 
+to "C:\Users\USER\AppDa
+ta\Roaming\xdg.config\.
+wrangler\logs\wrangler-
+2026-03-07_13-59-56_551
+.log"

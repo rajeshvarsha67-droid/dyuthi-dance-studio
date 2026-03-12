@@ -1,0 +1,110 @@
+
+> dyuthi-dance-studio@0.1.0 deploy
+> npm run cf:build && wrangler deploy
+
+
+> dyuthi-dance-studio@0.1.0 cf:build
+> npx @opennextjs/cloudflare build
+
+
+┌─────────────────────────────┐
+│ OpenNext — Cloudflare build │
+└─────────────────────────────┘
+
+WARN OpenNext is not fully compatible with Windows.
+WARN For optimal performance, it is recommended to use Windows Subsystem for Linux (WSL).
+WARN While OpenNext may function on Windows, it could encounter unpredictable failures during runtime.
+App directory: D:\dyuthi-dance-studio
+Next.js version : 16.1.6
+@opennextjs/cloudflare version: 1.17.1
+@opennextjs/aws version: 3.9.16
+
+┌─────────────────────────────────┐
+│ OpenNext — Building Next.js app │
+└─────────────────────────────────┘
+
+
+> dyuthi-dance-studio@0.1.0 build
+> next build
+
+▲ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.0s
+  Running TypeScript ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/5) ...
+  Generating static pages using 11 workers (1/5) 
+  Generating static pages using 11 workers (2/5) 
+  Generating static pages using 11 workers (3/5) 
+✓ Generating static pages using 11 workers (5/5) in 293.6ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/register
+└ ○ /our-story
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+┌──────────────────────────────┐
+│ OpenNext — Generating bundle │
+└──────────────────────────────┘
+
+Bundling middleware function...
+Bundling static assets...
+Bundling cache assets...
+Building server function: default...
+Applying code patches: 2.515s
+# copyPackageTemplateFiles
+[35m⚙️ Bundling the OpenNext server...
+[0m
+[35mWorker saved in `.open-next\worker.js` 🚀
+[0m
+OpenNext build complete.
+
+ ⛅️ wrangler 4.71.0
+───────────────────
+OpenNext project detected, calling `opennextjs-cloudflare deploy`
+
+┌──────────────────────────────┐
+│ OpenNext — Cloudflare deploy │
+└──────────────────────────────┘
+
+WARN OpenNext is not fully compatible with Windows.
+WARN For optimal performance, it is recommended to use Windows Subsystem for Linux (WSL).
+WARN While OpenNext may function on Windows, it could encounter unpredictable failures during runtime.
+Incremental cache does not need populating
+Tag cache does not need populating
+
+ ⛅️ wrangler 4.71.0
+───────────────────
+🌀 Building list of assets...
+✨ Read 53 files from the assets directory D:\dyuthi-dance-studio\.open-next\assets
+🌀 Starting asset upload...
+🌀 Found 3 new or modified static assets to upload. Proceeding with upload...
++ /BUILD_ID
++ /_next/static/chunks/3471c50096540383.css
++ /_next/static/chunks/02a1357522a1de77.js
+Uploaded 1 of 3 assets
+Uploaded 2 of 3 assets
+Uploaded 3 of 3 assets
+✨ Success! Uploaded 3 files (44 already uploaded) (1.37 sec)
+
+Total Upload: 5244.61 KiB / gzip: 1328.62 KiB
+Worker Startup Time: 28 ms
+Your Worker has access to the following bindings:
+Binding            Resource      
+env.ASSETS         Assets        
+
+Uploaded dyuthi-dance-studio (19.66 sec)
+Deployed dyuthi-dance-studio triggers (5.26 sec)
+  https://dyuthi-dance-studio.rajeshvarsha67.workers.dev
+Current Version ID: 14542a89-d467-4d74-a502-5a0f37a12d3d
+(node:3928) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)

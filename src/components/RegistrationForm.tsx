@@ -89,12 +89,26 @@ export default function RegistrationForm() {
                 handleUserLogin(session.user);
             } else {
                 setUser(null);
-                setAuthMode("signup");
+                setAuthMode(window.location.hash === "#login" ? "login" : "signup");
                 setFormData(initialFormData);
             }
         });
 
-        return () => subscription.unsubscribe();
+        // Listen for hash changes to switch between login and signup
+        const handleHashChange = () => {
+            if (window.location.hash === "#login") {
+                setAuthMode("login");
+            } else if (window.location.hash === "#register") {
+                setAuthMode("signup");
+            }
+        };
+        handleHashChange(); // check on mount
+        window.addEventListener("hashchange", handleHashChange);
+
+        return () => {
+            subscription.unsubscribe();
+            window.removeEventListener("hashchange", handleHashChange);
+        };
     }, []);
 
     // Countdown timer for resend cooldown
@@ -361,7 +375,8 @@ export default function RegistrationForm() {
         : [];
 
     return (
-        <section id="register" className="bg-white py-20 lg:py-28">
+        <section id="register" className="bg-white py-20 lg:py-28 relative">
+            <div id="login" className="absolute -top-20" />
             <div className="max-w-lg mx-auto px-6">
                 <div className="text-center mb-10 text-slate-900 flex flex-col items-center">
                     <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[#D32F2F] mb-4 block">
@@ -406,7 +421,7 @@ export default function RegistrationForm() {
 
                 <form
                     onSubmit={handleSubmit}
-                    className="bg-white rounded-2xl border border-gray-200 shadow-lg p-8 flex flex-col gap-5"
+                    className="rounded-2xl skeuo-panel p-8 flex flex-col gap-5"
                     noValidate
                 >
                     {/* Basic Info - Hidden if just logging in or verifying OTP */}
@@ -421,7 +436,7 @@ export default function RegistrationForm() {
                                     placeholder="Enter your full name"
                                     value={formData.name}
                                     onChange={(e) => updateField("name", e.target.value)}
-                                    className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 ${errors.name ? "border-red-400" : "border-gray-200"}`}
+                                    className={`w-full px-4 py-3 text-sm border-none rounded-lg focus:ring-4 focus:ring-[#D32F2F]/30 outline-none transition-all skeuo-inset ${errors.name ? "ring-2 ring-red-400" : ""}`}
                                 />
                                 {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
                             </div>
@@ -437,7 +452,7 @@ export default function RegistrationForm() {
                                         min={4}
                                         value={formData.age}
                                         onChange={(e) => updateField("age", e.target.value)}
-                                        className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 ${errors.age ? "border-red-400" : "border-gray-200"}`}
+                                        className={`w-full px-4 py-3 text-sm border-none rounded-lg focus:ring-4 focus:ring-[#D32F2F]/30 outline-none transition-all skeuo-inset ${errors.age ? "ring-2 ring-red-400" : ""}`}
                                     />
                                     {errors.age && <p className="mt-1 text-xs text-red-500">{errors.age}</p>}
                                 </div>
@@ -449,7 +464,7 @@ export default function RegistrationForm() {
                                         placeholder="10-digit number"
                                         value={formData.whatsapp}
                                         onChange={(e) => updateField("whatsapp", e.target.value)}
-                                        className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 ${errors.whatsapp ? "border-red-400" : "border-gray-200"}`}
+                                        className={`w-full px-4 py-3 text-sm border-none rounded-lg focus:ring-4 focus:ring-[#D32F2F]/30 outline-none transition-all skeuo-inset ${errors.whatsapp ? "ring-2 ring-red-400" : ""}`}
                                     />
                                     {errors.whatsapp && <p className="mt-1 text-xs text-red-500">{errors.whatsapp}</p>}
                                 </div>
@@ -467,7 +482,7 @@ export default function RegistrationForm() {
                                 placeholder="you@example.com"
                                 value={formData.email}
                                 onChange={(e) => updateField("email", e.target.value)}
-                                className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 ${errors.email ? "border-red-400" : "border-gray-200"}`}
+                                className={`w-full px-4 py-3 text-sm border-none rounded-lg focus:ring-4 focus:ring-[#D32F2F]/30 outline-none transition-all skeuo-inset ${errors.email ? "ring-2 ring-red-400" : ""}`}
                             />
                             {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
                         </div>
@@ -483,7 +498,7 @@ export default function RegistrationForm() {
                                 placeholder="Min 6 characters"
                                 value={formData.password}
                                 onChange={(e) => updateField("password", e.target.value)}
-                                className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 ${errors.password ? "border-red-400" : "border-gray-200"}`}
+                                className={`w-full px-4 py-3 text-sm border-none rounded-lg focus:ring-4 focus:ring-[#D32F2F]/30 outline-none transition-all skeuo-inset ${errors.password ? "ring-2 ring-red-400" : ""}`}
                             />
                             {errors.password && <p className="mt-1 text-xs text-red-500">{errors.password}</p>}
                         </div>
@@ -499,7 +514,7 @@ export default function RegistrationForm() {
                                     required
                                     value={formData.location}
                                     onChange={(e) => updateField("location", e.target.value)}
-                                    className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 appearance-none ${errors.location ? "border-red-400" : "border-gray-200"}`}
+                                    className={`w-full px-4 py-3 text-sm border-none rounded-lg focus:ring-4 focus:ring-[#D32F2F]/30 outline-none transition-all skeuo-inset appearance-none ${errors.location ? "ring-2 ring-red-400" : ""}`}
                                 >
                                     <option value="">Select a location</option>
                                     <option value="kaloor">Kaloor Branch</option>
@@ -517,7 +532,7 @@ export default function RegistrationForm() {
                                     value={formData.preferredBatch}
                                     onChange={(e) => updateField("preferredBatch", e.target.value)}
                                     disabled={!formData.location}
-                                    className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 appearance-none ${errors.preferredBatch ? "border-red-400" : "border-gray-200"} ${!formData.location ? "opacity-50 cursor-not-allowed" : ""}`}
+                                    className={`w-full px-4 py-3 text-sm border-none rounded-lg focus:ring-4 focus:ring-[#D32F2F]/30 outline-none transition-all skeuo-inset appearance-none ${errors.preferredBatch ? "ring-2 ring-red-400" : ""} ${!formData.location ? "opacity-50 cursor-not-allowed" : ""}`}
                                 >
                                     <option value="">{formData.location ? "Select a batch" : "Select a location first"}</option>
                                     {availableBatches.map((batch) => (
@@ -547,7 +562,7 @@ export default function RegistrationForm() {
                                 placeholder="00000000"
                                 value={otpCode}
                                 onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 8))}
-                                className="w-48 text-center text-2xl font-mono tracking-[0.5em] px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-[#D32F2F]/20 focus:border-[#D32F2F] outline-none transition-all bg-gray-50 border-gray-300"
+                                className="w-48 text-center text-2xl font-mono tracking-[0.5em] px-4 py-3 border-none rounded-lg focus:ring-4 focus:ring-[#D32F2F]/30 outline-none transition-all skeuo-inset"
                                 autoFocus
                             />
 
@@ -568,7 +583,7 @@ export default function RegistrationForm() {
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full mt-4 flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-[#D32F2F] rounded-lg hover:bg-[#B71C1C] transition-colors shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
+                        className="w-full mt-4 flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold rounded-lg skeuo-btn-primary disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                         {isLoading ? (
                             <><Loader2 size={18} className="animate-spin" /> {authMode === "login" ? "Logging In..." : authMode === "verify_otp" ? "Verifying..." : "Submitting..."}</>

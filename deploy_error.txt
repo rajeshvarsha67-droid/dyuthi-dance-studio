@@ -1,0 +1,56 @@
+
+ ⛅️ wrangler 4.71.0
+───────────────────
+OpenNext project detected, calling `opennextjs-cloudflare deploy`
+
+┌──────────────────────────────┐
+│ OpenNext — Cloudflare deploy │
+└──────────────────────────────┘
+
+WARN OpenNext is not fully compatible with Windows.
+WARN For optimal performance, it is recommended to use Windows Subsystem for Linux (WSL).
+WARN While OpenNext may function on Windows, it could encounter unpredictable failures during runtime.
+Incremental cache does not need populating
+Tag cache does not need populating
+
+ ⛅️ wrangler 4.71.0
+───────────────────
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mA file or directory could not be found.[0m
+
+  
+  Missing file or directory: D:\dyuthi-dance-studio\.wrangler\tmp\deploy-5Kg1lC\77d9faebf7af9e421806970ce10a58e9d83116d7-resvg.wasm?module
+  
+  This is typically caused by:
+    - The file or directory does not exist
+    - A typo in the file path
+    - The file was moved or deleted
+  
+  Please check the file path and try again.
+
+
+🪵  Logs were written to "C:\Users\USER\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-03-07_14-09-26_011.log"
+ERROR Wrangler deploy command failed:
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mA file or directory could not be found.[0m
+
+  
+  Missing file or directory: D:\dyuthi-dance-studio\.wrangler\tmp\deploy-5Kg1lC\77d9faebf7af9e421806970ce10a58e9d83116d7-resvg.wasm?module
+  
+  This is typically caused by:
+    - The file or directory does not exist
+    - A typo in the file path
+    - The file was moved or deleted
+  
+  Please check the file path and try again.
+
+
+🪵  Logs were written to "C:\Users\USER\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-03-07_14-09-26_011.log"
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1m[0m
+
+
+[32mIf you think this is a bug then please create an issue at https://github.com/cloudflare/workers-sdk/issues/new/choose[0m
+? Would you like to report this error to Cloudflare? Wrangler's output and the error details will be shared with the Wrangler team to help us diagnose and fix the issue.
+🤖 Using fallback value in non-interactive context: no
+🪵  Logs were written to "C:\Users\USER\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-03-07_14-09-23_332.log"

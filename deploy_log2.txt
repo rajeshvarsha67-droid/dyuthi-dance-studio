@@ -1,0 +1,125 @@
+
+> dyuthi-dance-studio@0.1.0 deploy
+> npm run cf:build && wrangler deploy
+
+
+> dyuthi-dance-studio@0.1.0 cf:build
+> npx @opennextjs/cloudflare build
+
+
+┌─────────────────────────────┐
+│ OpenNext — Cloudflare build │
+└─────────────────────────────┘
+
+WARN OpenNext is not fully compatible with Windows.
+WARN For optimal performance, it is recommended to use Windows Subsystem for Linux (WSL).
+WARN While OpenNext may function on Windows, it could encounter unpredictable failures during runtime.
+App directory: D:\dyuthi-dance-studio
+Next.js version : 16.1.6
+@opennextjs/cloudflare version: 1.17.1
+@opennextjs/aws version: 3.9.16
+
+┌─────────────────────────────────┐
+│ OpenNext — Building Next.js app │
+└─────────────────────────────────┘
+
+
+> dyuthi-dance-studio@0.1.0 build
+> next build
+
+▲ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.0s
+  Running TypeScript ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/5) ...
+  Generating static pages using 11 workers (1/5) 
+  Generating static pages using 11 workers (2/5) 
+  Generating static pages using 11 workers (3/5) 
+✓ Generating static pages using 11 workers (5/5) in 295.6ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/register
+└ ○ /our-story
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+┌──────────────────────────────┐
+│ OpenNext — Generating bundle │
+└──────────────────────────────┘
+
+Bundling middleware function...
+Bundling static assets...
+Bundling cache assets...
+Building server function: default...
+Applying code patches: 2.593s
+# copyPackageTemplateFiles
+[35m⚙️ Bundling the OpenNext server...
+[0m
+[35mWorker saved in `.open-next\worker.js` 🚀
+[0m
+OpenNext build complete.
+
+ ⛅️ wrangler 4.71.0
+───────────────────
+OpenNext project detected, calling `opennextjs-cloudflare deploy`
+
+┌──────────────────────────────┐
+│ OpenNext — Cloudflare deploy │
+└──────────────────────────────┘
+
+WARN OpenNext is not fully compatible with Windows.
+WARN For optimal performance, it is recommended to use Windows Subsystem for Linux (WSL).
+WARN While OpenNext may function on Windows, it could encounter unpredictable failures during runtime.
+Incremental cache does not need populating
+Tag cache does not need populating
+
+ ⛅️ wrangler 4.71.0
+───────────────────
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mA file or directory could not be found.[0m
+
+  
+  Missing file or directory: D:\dyuthi-dance-studio\.wrangler\tmp\deploy-JPoMKv\77d9faebf7af9e421806970ce10a58e9d83116d7-resvg.wasm?module
+  
+  This is typically caused by:
+    - The file or directory does not exist
+    - A typo in the file path
+    - The file was moved or deleted
+  
+  Please check the file path and try again.
+
+
+🪵  Logs were written to "C:\Users\USER\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-03-07_14-12-33_353.log"
+ERROR Wrangler deploy command failed:
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mA file or directory could not be found.[0m
+
+  
+  Missing file or directory: D:\dyuthi-dance-studio\.wrangler\tmp\deploy-JPoMKv\77d9faebf7af9e421806970ce10a58e9d83116d7-resvg.wasm?module
+  
+  This is typically caused by:
+    - The file or directory does not exist
+    - A typo in the file path
+    - The file was moved or deleted
+  
+  Please check the file path and try again.
+
+
+🪵  Logs were written to "C:\Users\USER\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-03-07_14-12-33_353.log"
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1m[0m
+
+
+[32mIf you think this is a bug then please create an issue at https://github.com/cloudflare/workers-sdk/issues/new/choose[0m
+? Would you like to report this error to Cloudflare? Wrangler's output and the error details will be shared with the Wrangler team to help us diagnose and fix the issue.
+🤖 Using fallback value in non-interactive context: no
+🪵  Logs were written to "C:\Users\USER\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-03-07_14-12-30_639.log"

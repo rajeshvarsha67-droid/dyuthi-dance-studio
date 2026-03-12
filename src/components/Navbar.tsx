@@ -49,14 +49,14 @@ export default function Navbar() {
                 {/* Desktop Buttons */}
                 <div className="hidden lg:flex items-center gap-3">
                     <Link
-                        href="/#register"
-                        className="px-5 py-2 text-sm font-medium text-slate-900 border border-slate-300 rounded-lg hover:bg-gray-50 transition-colors"
+                        href="/#login"
+                        className="px-5 py-2 text-sm font-medium text-slate-900 rounded-lg skeuo-btn"
                     >
                         Login
                     </Link>
                     <Link
                         href="/#register"
-                        className="px-5 py-2 text-sm font-medium text-white bg-[#D32F2F] rounded-lg hover:bg-[#B71C1C] transition-colors"
+                        className="px-5 py-2 text-sm font-medium text-white rounded-lg skeuo-btn-primary"
                     >
                         Register
                     </Link>
@@ -90,15 +90,15 @@ export default function Navbar() {
                     </ul>
                     <div className="flex flex-col gap-3 mt-6">
                         <Link
-                            href="/#register"
-                            className="w-full px-5 py-2.5 text-sm font-medium text-slate-900 border border-slate-300 rounded-lg hover:bg-gray-50 text-center"
+                            href="/#login"
+                            className="w-full px-5 py-2.5 text-sm font-medium text-slate-900 rounded-lg skeuo-btn text-center"
                             onClick={() => setMobileOpen(false)}
                         >
                             Login
                         </Link>
                         <Link
                             href="/#register"
-                            className="w-full px-5 py-2.5 text-sm font-medium text-white bg-[#D32F2F] rounded-lg hover:bg-[#B71C1C] text-center"
+                            className="w-full px-5 py-2.5 text-sm font-medium text-white rounded-lg skeuo-btn-primary text-center"
                             onClick={() => setMobileOpen(false)}
                         >
                             Register
