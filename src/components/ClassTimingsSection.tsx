@@ -60,35 +60,34 @@ export default function ClassTimingsSection() {
                                 </div>
                             </div>
 
-                            {/* Schedule Table */}
-                            <table className="w-full">
-                                <thead>
-                                    <tr className="text-left text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 font-sans border-b border-gray-200">
-                                        <th className="pb-4">Class</th>
-                                        <th className="pb-4">Days</th>
-                                        <th className="pb-4 text-right">Time</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {schedule.classes.map((cls) => (
-                                        <tr
-                                            key={cls.name}
-                                            className="border-b border-gray-100"
-                                        >
-                                            <td className="py-5 text-sm font-medium text-[#1A1A1A] font-sans">
-                                                {cls.name}
-                                            </td>
-                                            <td className="py-5 text-sm text-gray-500 font-sans">
-                                                {cls.days}
-                                            </td>
-                                            <td className="py-5 text-sm text-gray-500 text-right flex items-center justify-end gap-1.5 font-sans">
-                                                <Clock size={14} className="text-gray-300" />
-                                                {cls.time}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            {/* Schedule Grid */}
+                            <div>
+                                {/* Header Row */}
+                                <div className="grid grid-cols-3 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 font-sans border-b border-gray-200 pb-4">
+                                    <span>Class</span>
+                                    <span>Days</span>
+                                    <span className="text-right">Time</span>
+                                </div>
+
+                                {/* Data Rows */}
+                                {schedule.classes.map((cls) => (
+                                    <div
+                                        key={cls.name}
+                                        className="grid grid-cols-3 border-b border-gray-100 py-5"
+                                    >
+                                        <span className="text-sm font-medium text-[#1A1A1A] font-sans">
+                                            {cls.name}
+                                        </span>
+                                        <span className="text-sm text-gray-500 font-sans">
+                                            {cls.days}
+                                        </span>
+                                        <span className="text-sm text-gray-500 text-right flex items-center justify-end gap-1.5 font-sans">
+                                            <Clock size={14} className="text-gray-300" />
+                                            {cls.time}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     ))}
                 </div>
