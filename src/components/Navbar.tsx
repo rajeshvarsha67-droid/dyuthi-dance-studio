@@ -19,8 +19,8 @@ export default function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
 
     return (
-        <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-24">
+        <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200/60">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
                 {/* Logo */}
                 <Link href="/#home" className="flex items-center mr-8">
                     <Image
@@ -28,7 +28,7 @@ export default function Navbar() {
                         alt="Dyuthi Dance Studio"
                         width={240}
                         height={120}
-                        className="object-contain max-h-[120px] w-auto"
+                        className="object-contain max-h-[100px] w-auto"
                     />
                 </Link>
 
@@ -38,7 +38,7 @@ export default function Navbar() {
                         <li key={link.href}>
                             <Link
                                 href={link.href}
-                                className="text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+                                className="text-[11px] uppercase tracking-[0.2em] font-medium text-[#1A1A1A] hover:opacity-50 transition-opacity duration-300"
                             >
                                 {link.label}
                             </Link>
@@ -47,16 +47,16 @@ export default function Navbar() {
                 </ul>
 
                 {/* Desktop Buttons */}
-                <div className="hidden lg:flex items-center gap-3">
+                <div className="hidden lg:flex items-center gap-4">
                     <Link
                         href="/#login"
-                        className="px-5 py-2 text-sm font-medium text-slate-900 rounded-lg skeuo-btn"
+                        className="text-[11px] uppercase tracking-[0.2em] font-medium text-[#1A1A1A] hover:opacity-50 transition-opacity duration-300"
                     >
                         Login
                     </Link>
                     <Link
                         href="/#register"
-                        className="px-5 py-2 text-sm font-medium text-white rounded-lg skeuo-btn-primary"
+                        className="px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] font-semibold text-[#1A1A1A] border border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white transition-all duration-300"
                     >
                         Register
                     </Link>
@@ -64,7 +64,7 @@ export default function Navbar() {
 
                 {/* Mobile Toggle */}
                 <button
-                    className="lg:hidden p-2 text-slate-700"
+                    className="lg:hidden p-2 text-[#1A1A1A]"
                     onClick={() => setMobileOpen(!mobileOpen)}
                     aria-label="Toggle menu"
                 >
@@ -74,13 +74,13 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {mobileOpen && (
-                <div className="lg:hidden bg-white border-t border-gray-100 px-6 pb-6">
-                    <ul className="flex flex-col gap-4 pt-4">
+                <div className="lg:hidden bg-white/95 backdrop-blur-sm border-t border-gray-200/60 px-6 pb-8">
+                    <ul className="flex flex-col gap-5 pt-6">
                         {navLinks.map((link) => (
                             <li key={link.href}>
                                 <Link
                                     href={link.href}
-                                    className="text-sm font-medium text-slate-700 hover:text-slate-900"
+                                    className="text-[11px] uppercase tracking-[0.2em] font-medium text-[#1A1A1A] hover:opacity-50 transition-opacity duration-300"
                                     onClick={() => setMobileOpen(false)}
                                 >
                                     {link.label}
@@ -88,17 +88,17 @@ export default function Navbar() {
                             </li>
                         ))}
                     </ul>
-                    <div className="flex flex-col gap-3 mt-6">
+                    <div className="flex flex-col gap-4 mt-8">
                         <Link
                             href="/#login"
-                            className="w-full px-5 py-2.5 text-sm font-medium text-slate-900 rounded-lg skeuo-btn text-center"
+                            className="text-center text-[11px] uppercase tracking-[0.2em] font-medium text-[#1A1A1A] py-2.5 hover:opacity-50 transition-opacity duration-300"
                             onClick={() => setMobileOpen(false)}
                         >
                             Login
                         </Link>
                         <Link
                             href="/#register"
-                            className="w-full px-5 py-2.5 text-sm font-medium text-white rounded-lg skeuo-btn-primary text-center"
+                            className="text-center px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] font-semibold text-[#1A1A1A] border border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white transition-all duration-300"
                             onClick={() => setMobileOpen(false)}
                         >
                             Register
@@ -109,4 +109,3 @@ export default function Navbar() {
         </nav>
     );
 }
-

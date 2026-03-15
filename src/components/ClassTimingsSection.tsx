@@ -1,7 +1,4 @@
-"use client";
-
-import { useState } from "react";
-import { ChevronDown, Clock, MapPin } from "lucide-react";
+import { Clock, MapPin } from "lucide-react";
 
 interface BranchSchedule {
     branch: string;
@@ -35,82 +32,63 @@ const schedules: BranchSchedule[] = [
 ];
 
 export default function ClassTimingsSection() {
-    const [openIndex, setOpenIndex] = useState<number>(0);
-
     return (
-        <section id="schedule" className="bg-gray-50 py-20 lg:py-28">
-            <div className="max-w-3xl mx-auto px-6 lg:px-12">
-                <div className="text-center mb-14">
-                    <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[#D32F2F] mb-4 block">
+        <section id="schedule" className="bg-[#F9F8F6] py-24 lg:py-32">
+            <div className="max-w-4xl mx-auto px-6 lg:px-12">
+                <div className="text-center mb-20">
+                    <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-gray-400 mb-4 block font-sans">
                         Schedule
                     </span>
-                    <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">
+                    <h2 className="font-serif text-4xl lg:text-5xl font-bold text-[#1A1A1A]">
                         Class Timings
                     </h2>
                 </div>
 
-                <div className="flex flex-col gap-4">
-                    {schedules.map((schedule, idx) => (
-                        <div
-                            key={schedule.branch}
-                            className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm"
-                        >
-                            {/* Accordion Header */}
-                            <button
-                                onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
-                                className="w-full flex items-center justify-between px-6 py-5 hover:bg-gray-50 transition-colors"
-                            >
-                                <div className="flex items-center gap-3">
-                                    <MapPin size={18} className="text-[#D32F2F]" />
-                                    <div className="text-left">
-                                        <h3 className="text-base font-semibold text-slate-900">
-                                            {schedule.branch}
-                                        </h3>
-                                        <p className="text-xs text-slate-500">
-                                            {schedule.location}
-                                        </p>
-                                    </div>
+                <div className="flex flex-col gap-16">
+                    {schedules.map((schedule) => (
+                        <div key={schedule.branch}>
+                            {/* Branch Header */}
+                            <div className="flex items-center gap-2 mb-8">
+                                <MapPin size={16} className="text-gray-400" />
+                                <div>
+                                    <h3 className="font-serif text-xl font-semibold text-[#1A1A1A]">
+                                        {schedule.branch}
+                                    </h3>
+                                    <p className="text-[11px] uppercase tracking-[0.15em] text-gray-400 font-sans">
+                                        {schedule.location}
+                                    </p>
                                 </div>
-                                <ChevronDown
-                                    size={20}
-                                    className={`text-slate-400 transition-transform duration-200 ${openIndex === idx ? "rotate-180" : ""
-                                        }`}
-                                />
-                            </button>
+                            </div>
 
-                            {/* Accordion Content */}
-                            {openIndex === idx && (
-                                <div className="border-t border-gray-100 px-6 pb-5">
-                                    <table className="w-full mt-4">
-                                        <thead>
-                                            <tr className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                                                <th className="pb-3">Class</th>
-                                                <th className="pb-3">Days</th>
-                                                <th className="pb-3 text-right">Time</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {schedule.classes.map((cls) => (
-                                                <tr
-                                                    key={cls.name}
-                                                    className="border-t border-gray-50"
-                                                >
-                                                    <td className="py-3 text-sm font-medium text-slate-900">
-                                                        {cls.name}
-                                                    </td>
-                                                    <td className="py-3 text-sm text-slate-600">
-                                                        {cls.days}
-                                                    </td>
-                                                    <td className="py-3 text-sm text-slate-600 text-right flex items-center justify-end gap-1.5">
-                                                        <Clock size={14} className="text-slate-400" />
-                                                        {cls.time}
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            )}
+                            {/* Schedule Table */}
+                            <table className="w-full">
+                                <thead>
+                                    <tr className="text-left text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 font-sans border-b border-gray-200">
+                                        <th className="pb-4">Class</th>
+                                        <th className="pb-4">Days</th>
+                                        <th className="pb-4 text-right">Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {schedule.classes.map((cls) => (
+                                        <tr
+                                            key={cls.name}
+                                            className="border-b border-gray-100"
+                                        >
+                                            <td className="py-5 text-sm font-medium text-[#1A1A1A] font-sans">
+                                                {cls.name}
+                                            </td>
+                                            <td className="py-5 text-sm text-gray-500 font-sans">
+                                                {cls.days}
+                                            </td>
+                                            <td className="py-5 text-sm text-gray-500 text-right flex items-center justify-end gap-1.5 font-sans">
+                                                <Clock size={14} className="text-gray-300" />
+                                                {cls.time}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     ))}
                 </div>

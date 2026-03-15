@@ -27,21 +27,21 @@ const instructors = [
 
 export default function InstructorsSection() {
     return (
-        <section id="instructors" className="bg-gray-50 py-20 lg:py-28">
+        <section id="instructors" className="bg-white py-24 lg:py-32">
             <div className="max-w-7xl mx-auto px-6 lg:px-12">
-                <div className="text-center mb-14">
-                    <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[#D32F2F] mb-4 block">
+                <div className="text-center mb-20">
+                    <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-gray-400 mb-4 block font-sans">
                         Our Team
                     </span>
-                    <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">
+                    <h2 className="font-serif text-4xl lg:text-5xl font-bold text-[#1A1A1A]">
                         Meet Our Instructors
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
                     {instructors.map((inst) => (
                         <div key={inst.name} className="text-center group">
-                            <div className="relative w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden shadow-lg ring-4 ring-white">
+                            <div className="relative w-44 h-44 mx-auto mb-8 rounded-full overflow-hidden">
                                 <Image
                                     src={inst.image}
                                     alt={inst.name}
@@ -53,13 +53,13 @@ export default function InstructorsSection() {
                                     }}
                                 />
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-1">
+                            <h3 className="font-serif text-2xl font-semibold text-[#1A1A1A] mb-1">
                                 {inst.name}
                             </h3>
-                            <p className="text-sm font-medium text-[#D32F2F] mb-3">
+                            <p className="text-[11px] uppercase tracking-[0.15em] font-medium text-gray-400 mb-4 font-sans">
                                 {inst.title}
                             </p>
-                            <p className="text-sm text-slate-600 leading-relaxed max-w-xs mx-auto">
+                            <p className="text-sm text-gray-500 leading-relaxed max-w-xs mx-auto font-sans">
                                 {inst.bio}
                             </p>
                         </div>
