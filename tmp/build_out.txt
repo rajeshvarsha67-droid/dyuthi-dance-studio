@@ -1,0 +1,62 @@
+﻿Ôû▓ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+
+node.exe : ÔÜá The 
+"middleware" file 
+convention is deprecated. 
+Please use "proxy" 
+instead. Learn more: https:
+//nextjs.org/docs/messages/
+middleware-to-proxy
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+    + CategoryInfo         
+     : NotSpecified: (ÔÜá  
+   The "middle...leware-   
+ to-proxy:String) [], R    
+emoteException
+    + FullyQualifiedErrorI 
+   d : NativeCommandError
+ 
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 1773.9ms
+  Running TypeScript ...
+Failed to compile.
+
+./src/app/update-password/p
+age.tsx:25:14
+Type error: Parameter 
+'event' implicitly has an 
+'any' type.
+
+[0m [90m 23 |[39m
+ [90m 24 |[39m         
+[36mconst[39m { 
+data[33m:[39m { 
+subscription } } 
+[33m=[39m supabase[33m.
+[39mauth[33m.[39monAuthSt
+ateChange(
+[31m[1m>[22m[39m[90m 
+25 |[39m             
+(event) [33m=>[39m {
+ [90m    |[39m           
+   [31m[1m^[22m[39m
+ [90m 26 |[39m           
+      [36mif[39m (event 
+[33m===[39m [32m"PASSWOR
+D_RECOVERY"[39m) {
+ [90m 27 |[39m           
+          setIsReady([36mt
+rue[39m)[33m;[39m
+ [90m 28 |[39m           
+      }[0m
+Next.js build worker 
+exited with code: 1 and 
+signal: null

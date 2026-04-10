@@ -4,19 +4,34 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const reviews = [
-    { image: "/images/review-1.jpg", alt: "Happy student 1", review: "Dyuthi completely changed my approach to dance. The instructors are phenomenal!" },
-    { image: "/images/review-2.jpg", alt: "Happy student 2", review: "A vibrant community and a rigorous training ground. Highly recommended." },
-    { image: "/images/review-3.jpg", alt: "Happy student 3", review: "My confidence has skyrocketed since I joined. The best decision ever." },
-    { image: "/images/review-4.jpg", alt: "Happy student 4", review: "Professional, fun, and deeply inspiring. I look forward to every class." },
+interface Review {
+    id?: string;
+    student_name: string;
+    review_text: string;
+    rating?: number;
+    image?: string; // fallback
+    alt?: string; // fallback
+}
+
+interface ReviewsSectionProps {
+    reviews?: Review[];
+}
+
+const FALLBACK_REVIEWS = [
+    { student_name: "Happy Student 1", image: "/images/review-1.jpg", alt: "Happy student 1", review_text: "Dyuthi completely changed my approach to dance. The instructors are phenomenal!" },
+    { student_name: "Happy Student 2", image: "/images/review-2.jpg", alt: "Happy student 2", review_text: "A vibrant community and a rigorous training ground. Highly recommended." },
+    { student_name: "Happy Student 3", image: "/images/review-3.jpg", alt: "Happy student 3", review_text: "My confidence has skyrocketed since I joined. The best decision ever." },
+    { student_name: "Happy Student 4", image: "/images/review-4.jpg", alt: "Happy student 4", review_text: "Professional, fun, and deeply inspiring. I look forward to every class." },
 ];
 
-export default function ReviewsSection() {
+export default function ReviewsSection({ reviews: initialReviews = [] }: ReviewsSectionProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const next = () => setCurrentIndex((prev) => (prev + 1) % reviews.length);
+    const displayReviews = initialReviews.length > 0 ? initialReviews : FALLBACK_REVIEWS;
+
+    const next = () => setCurrentIndex((prev) => (prev + 1) % displayReviews.length);
     const prev = () =>
-        setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+        setCurrentIndex((prev) => (prev - 1 + displayReviews.length) % displayReviews.length);
 
     return (
         <section className="bg-[#F9F8F6] py-24 lg:py-32">
@@ -50,7 +65,7 @@ export default function ReviewsSection() {
 
                     {/* Cards Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                        {reviews.map((review, idx) => (
+                        {displayReviews.map((review, idx) => (
                             <div
                                 key={idx}
                                 className={`bg-white p-8 flex flex-col items-center text-center transition-all duration-500 ${
@@ -61,17 +76,25 @@ export default function ReviewsSection() {
                                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                                 </svg>
 
-                                <p className="text-sm font-sans text-gray-600 leading-relaxed mb-8">
-                                    &ldquo;{review.review}&rdquo;
+                                <p className="text-sm font-sans text-gray-600 leading-relaxed mb-4">
+                                    &ldquo;{review.review_text}&rdquo;
+                                </p>
+                                
+                                <p className="text-xs font-semibold text-charcoal mb-4 uppercase tracking-widest">
+                                    - {review.student_name}
                                 </p>
 
-                                <div className="relative w-14 h-14 rounded-full overflow-hidden mt-auto">
-                                    <Image
-                                        src={review.image}
-                                        alt={review.alt}
-                                        fill
-                                        className="object-cover"
-                                    />
+                                <div className="relative w-14 h-14 rounded-full overflow-hidden mt-auto bg-gray-100 flex items-center justify-center">
+                                    {review.image ? (
+                                        <Image
+                                            src={review.image}
+                                            alt={review.alt || "Student Reviewer"}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    ) : (
+                                        <span className="text-gray-400 font-bold text-lg">{review.student_name.charAt(0)}</span>
+                                    )}
                                 </div>
                             </div>
                         ))}

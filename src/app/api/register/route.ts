@@ -11,21 +11,9 @@ interface RegistrationBody {
     preferredBatch: string;
 }
 
-const VALID_LOCATIONS = ["kaloor", "kalamassery", "bpcl_township"];
 
-const LOCATION_BATCHES: Record<string, string[]> = {
-    kaloor: ["Zumba batch", "Western dance batch", "Bharathanatyam batch"],
-    kalamassery: ["Zumba batch", "Bollywood dance for women", "Western dance batch"],
-    bpcl_township: ["Senior batch", "Junior batch"],
-};
 
-const LOCATION_LABELS: Record<string, string> = {
-    kaloor: "Kaloor Branch",
-    kalamassery: "Kalamassery Branch",
-    bpcl_township: "BPCL Township",
-};
-
-function validateBody(body: RegistrationBody): string | null {
+function validateBasicFields(body: RegistrationBody): string | null {
     if (!body.name || body.name.trim().length < 2) {
         return "Name must be at least 2 characters.";
     }
@@ -45,13 +33,12 @@ function validateBody(body: RegistrationBody): string | null {
         return "Enter a valid email address.";
     }
 
-    if (!VALID_LOCATIONS.includes(body.location)) {
-        return "Please select a valid location.";
+    if (!body.location || !body.location.trim()) {
+        return "Please select a valid branch.";
     }
 
-    const validBatches = LOCATION_BATCHES[body.location] || [];
-    if (!validBatches.includes(body.preferredBatch)) {
-        return "Please select a valid batch for the chosen location.";
+    if (!body.preferredBatch || !body.preferredBatch.trim()) {
+        return "Please select a valid batch.";
     }
 
     return null;
@@ -69,10 +56,26 @@ export async function POST(request: NextRequest) {
 
         const body: RegistrationBody = await request.json();
 
-        const validationError = validateBody(body);
+        const validationError = validateBasicFields(body);
         if (validationError) {
             return NextResponse.json(
                 { error: validationError },
+                { status: 400 }
+            );
+        }
+
+        // Validate branch + dance_style against the batches table
+        const { data: matchingBatch } = await supabaseAdmin
+            .from("batches")
+            .select("id")
+            .eq("branch", body.location)
+            .eq("dance_style", body.preferredBatch)
+            .limit(1)
+            .maybeSingle();
+
+        if (!matchingBatch) {
+            return NextResponse.json(
+                { error: "The selected branch/batch combination is not valid. Please refresh and try again." },
                 { status: 400 }
             );
         }
@@ -135,8 +138,7 @@ export async function POST(request: NextRequest) {
                 .eq("id", data.id);
         } catch (aiError) {
             console.error("Welcome message error:", aiError);
-            const fallbackLocation = LOCATION_LABELS[data.Location] || data.Location;
-            welcomeMessage = `A very warm welcome to the Dyuthi Dance Studio family! We are absolutely thrilled to have you join our ${fallbackLocation} and embark on your dance journey with us.`;
+            welcomeMessage = `A very warm welcome to the Dyuthi Dance Studio family! We are absolutely thrilled to have you join our ${data.Location} and embark on your dance journey with us.`;
         }
 
         return NextResponse.json(

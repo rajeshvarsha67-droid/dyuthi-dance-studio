@@ -1,0 +1,68 @@
+﻿Ôû▓ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+
+node.exe : ÔÜá The 
+"middleware" file 
+convention is 
+deprecated. Please use 
+"proxy" instead. Learn 
+more: https://nextjs.or
+g/docs/messages/middlew
+are-to-proxy
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : 
+NotSpecified: (ÔÜá     
+The "middle...leware-  
+  to-proxy:String) [], 
+R    emoteException
+    + 
+FullyQualifiedErrorI   
+ d : NativeCommandError
+ 
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 1915.4ms
+  Running TypeScript ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/19) ...
+  Generating static pages using 11 workers (4/19) 
+  Generating static pages using 11 workers (9/19) 
+  Generating static pages using 11 workers (14/19) 
+Ô£ô Generating static pages using 11 workers (19/19) in 1823.2ms
+  Finalizing page optimization ...
+
+Route (app)               Revalidate  Expire
+Ôöî Ôùï /                             1m      1y
+Ôö£ Ôùï /_not-found
+Ôö£ ãÆ /admin/batches
+Ôö£ ãÆ /admin/broadcast
+Ôö£ ãÆ /admin/cms
+Ôö£ ãÆ /admin/dashboard
+Ôö£ Ôùï /admin/login
+Ôö£ ãÆ /admin/payments
+Ôö£ ãÆ /admin/reminders
+Ôö£ ãÆ /admin/students
+Ôö£ ãÆ /api/export
+Ôö£ ãÆ /api/export-payments
+Ôö£ ãÆ /api/register
+Ôö£ Ôùï /forgot-password
+Ôö£ ãÆ /mock-checkout
+Ôö£ Ôùï /our-story
+Ôö£ ãÆ /student/pay
+Ôöö Ôùï /update-password
+
+
+ãÆ Proxy (Middleware)
+
+Ôùï  (Static)   prerendered as static content
+ãÆ  (Dynamic)  server-rendered on demand
+

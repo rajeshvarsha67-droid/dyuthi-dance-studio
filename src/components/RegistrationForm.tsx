@@ -4,6 +4,19 @@ import { useState, useEffect, useRef, useCallback, type FormEvent } from "react"
 import { UserPlus, Loader2, CheckCircle2, XCircle, LogIn, LogOut, Mail, RefreshCw } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import type { User } from "@supabase/supabase-js";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+// Data shape coming from Supabase batches table
+interface BatchOption {
+    id: string;
+    branch: string;
+    dance_style: string;
+}
+
+interface RegistrationFormProps {
+    batches?: BatchOption[];
+}
 
 interface IRegistrationForm {
     name: string;
@@ -26,18 +39,6 @@ interface FormErrors {
     auth?: string;
 }
 
-const LOCATION_BATCHES: Record<string, string[]> = {
-    kaloor: ["Zumba batch", "Western dance batch", "Bharathanatyam batch"],
-    kalamassery: ["Zumba batch", "Bollywood dance for women", "Western dance batch"],
-    bpcl_township: ["Senior batch", "Junior batch"],
-};
-
-const LOCATION_LABELS: Record<string, string> = {
-    kaloor: "Kaloor branch",
-    kalamassery: "Kalamassery branch",
-    bpcl_township: "BPCL township",
-};
-
 const initialFormData: IRegistrationForm = {
     name: "",
     age: "",
@@ -50,7 +51,8 @@ const initialFormData: IRegistrationForm = {
 
 type AuthMode = "signup" | "login" | "authenticated" | "verify_otp";
 
-export default function RegistrationForm() {
+export default function RegistrationForm({ batches = [] }: RegistrationFormProps) {
+    const router = useRouter();
     const [formData, setFormData] = useState<IRegistrationForm>(initialFormData);
     const [authMode, setAuthMode] = useState<AuthMode>("signup");
     const [user, setUser] = useState<User | null>(null);
@@ -84,7 +86,7 @@ export default function RegistrationForm() {
         };
         checkSession();
 
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: string, session: any) => {
             if (session?.user) {
                 handleUserLogin(session.user);
             } else {
@@ -102,12 +104,27 @@ export default function RegistrationForm() {
                 setAuthMode("signup");
             }
         };
+        
+        // Listen for custom events for more reliable Navigation switching
+        const handleCustomAuthChange = (e: Event) => {
+            const customEvent = e as CustomEvent;
+            if (customEvent.detail === 'login') {
+                setAuthMode('login');
+                window.location.hash = '#login';
+            } else if (customEvent.detail === 'signup') {
+                setAuthMode('signup');
+                window.location.hash = '#register';
+            }
+        };
+
         handleHashChange(); // check on mount
         window.addEventListener("hashchange", handleHashChange);
+        window.addEventListener("switchAuthMode", handleCustomAuthChange);
 
         return () => {
             subscription.unsubscribe();
             window.removeEventListener("hashchange", handleHashChange);
+            window.removeEventListener("switchAuthMode", handleCustomAuthChange);
         };
     }, []);
 
@@ -217,6 +234,7 @@ export default function RegistrationForm() {
 
                 if (error) throw error;
                 // Success: onAuthStateChange will handle transition to "authenticated"
+                router.push("/mock-checkout");
 
             } else if (authMode === "verify_otp") {
                 // OTP Verification step
@@ -370,8 +388,14 @@ export default function RegistrationForm() {
         }
     };
 
+    // Derive unique branches from batch data
+    const uniqueBranches = Array.from(new Set(batches.map((b) => b.branch))).sort();
+
+    // Filter dance styles for the selected branch
     const availableBatches = formData.location
-        ? LOCATION_BATCHES[formData.location] || []
+        ? batches
+              .filter((b) => b.branch === formData.location)
+              .map((b) => b.dance_style)
         : [];
 
     return (
@@ -501,6 +525,16 @@ export default function RegistrationForm() {
                                 className={`w-full bg-transparent border-b border-gray-300 focus:border-[#1A1A1A] py-3 text-sm outline-none transition-colors duration-300 font-sans ${errors.password ? "border-red-400" : ""}`}
                             />
                             {errors.password && <p className="mt-1 text-xs text-red-500">{errors.password}</p>}
+                            {authMode === "login" && (
+                                <div className="mt-2 text-right">
+                                    <Link
+                                        href="/forgot-password"
+                                        className="text-xs text-[#D32F2F] font-medium hover:underline"
+                                    >
+                                        Forgot password?
+                                    </Link>
+                                </div>
+                            )}
                         </div>
                     )}
 
@@ -516,10 +550,12 @@ export default function RegistrationForm() {
                                     onChange={(e) => updateField("location", e.target.value)}
                                     className={`w-full bg-transparent border-b border-gray-300 focus:border-[#1A1A1A] py-3 text-sm outline-none transition-colors duration-300 appearance-none font-sans ${errors.location ? "border-red-400" : ""}`}
                                 >
-                                    <option value="">Select a location</option>
-                                    <option value="kaloor">Kaloor Branch</option>
-                                    <option value="kalamassery">Kalamassery Branch</option>
-                                    <option value="bpcl_township">BPCL Township</option>
+                                    <option value="">Select a branch</option>
+                                    {uniqueBranches.map((branch) => (
+                                        <option key={branch} value={branch}>
+                                            {branch}
+                                        </option>
+                                    ))}
                                 </select>
                                 {errors.location && <p className="mt-1 text-xs text-red-500">{errors.location}</p>}
                             </div>

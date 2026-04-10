@@ -15,7 +15,7 @@ export default function DanceStylesSection() {
                     <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-gray-400 mb-4 block font-sans">
                         What We Teach
                     </span>
-                    <h2 className="font-serif text-4xl lg:text-5xl font-bold text-[#1A1A1A]">
+                    <h2 className="font-serif text-3xl md:text-5xl font-bold text-[#1A1A1A]">
                         Our Dance Styles
                     </h2>
                 </div>

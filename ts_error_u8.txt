@@ -1,0 +1,10 @@
+﻿src/components/admin/AddBatchForm.tsx(33,33): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(action: (state: { error: string; success?: undefined; } | { success: boolean; error?: undefined; }) => { error: string; success?: undefined; } | { success: boolean; error?: undefined; } | Promise<{ error: string; success?: undefined; } | { ...; }>, initialState: { ...; } | { ...; }, permalink?: string | undefined): [state: ...]', gave the following error.
+    Argument of type '(prevState: any, formData: FormData) => Promise<{ error: string; success?: undefined; } | { success: boolean; error?: undefined; }>' is not assignable to parameter of type '(state: { error: string; success?: undefined; } | { success: boolean; error?: undefined; }) => { error: string; success?: undefined; } | { success: boolean; error?: undefined; } | Promise<{ error: string; success?: undefined; } | { ...; }>'.
+      Target signature provides too few arguments. Expected 2 or more, but got 1.
+  Overload 2 of 2, '(action: (state: { error: string; success?: undefined; } | { success: boolean; error?: undefined; }, payload: FormData) => { error: string; success?: undefined; } | { success: boolean; error?: undefined; } | Promise<...>, initialState: { ...; } | { ...; }, permalink?: string | undefined): [state: ...]', gave the following error.
+    Argument of type '{ error: string; success: boolean; }' is not assignable to parameter of type '{ error: string; success?: undefined; } | { success: boolean; error?: undefined; }'.
+      Type '{ error: string; success: boolean; }' is not assignable to type '{ error: string; success?: undefined; }'.
+        Types of property 'success' are incompatible.
+          Type 'boolean' is not assignable to type 'undefined'.
+
